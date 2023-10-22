@@ -5,6 +5,9 @@ import {
 
 declare module '@mui/material/styles' {
   interface Theme extends OldTheme {
+    colors: {
+      border: string
+    }
     filters: {
       sm: string
       md: string
@@ -13,6 +16,9 @@ declare module '@mui/material/styles' {
   }
   // allow configuration using `createTheme`
   interface ThemeOptions extends OldOptions {
+    colors: {
+      border: string
+    }
     filters: {
       sm: string
       md: string

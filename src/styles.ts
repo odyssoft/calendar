@@ -22,3 +22,8 @@ export const CalendarContainer = styled(Box)(({ theme }) => ({
   overflow: 'auto',
   width: '100%',
 }))
+
+export const Row = styled(Flex)({
+  width: '100%',
+  flexDirection: 'row',
+})

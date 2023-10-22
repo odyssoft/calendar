@@ -1,6 +1,9 @@
 import { createTheme } from '@mui/material'
 
 export const theme = createTheme({
+  colors: {
+    border: 'rgba(255, 255, 255, 0.15)',
+  },
   filters: {
     sm: 'blur(16px) saturate(1.5)',
     md: 'blur(16px) saturate(2.5)',
