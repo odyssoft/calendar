@@ -8,6 +8,9 @@ export type CalendarContext = {
 
 export type CalendarView = 'day' | 'week' | 'month' | 'year'
 
+export type DateType =
+  `${number}${number}-${number}${number}-${number}${number}${number}${number}`
+
 export interface FlexProps extends React.HTMLAttributes<HTMLDivElement> {
   align?: Property.AlignItems
   direction?: Property.FlexDirection

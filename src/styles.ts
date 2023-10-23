@@ -27,3 +27,17 @@ export const Row = styled(Flex)({
   width: '100%',
   flexDirection: 'row',
 })
+
+export const Column = styled(Flex)({
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+  flexDirection: 'column',
+})
+
+export const Text = styled('span')(({ theme }) => ({
+  textShadow: theme.textShadow,
+  fontSize: 'inherit',
+  fontWeight: 'inherit',
+  lineHeight: 'inherit',
+}))

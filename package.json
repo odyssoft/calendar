@@ -69,6 +69,7 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "@mui/icons-material": "^5.14.14"
+    "@mui/icons-material": "^5.14.14",
+    "moment": "^2.29.4"
   }
 }
