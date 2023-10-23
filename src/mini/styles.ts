@@ -1,4 +1,10 @@
-import { Button, IconButton, Typography, styled } from '@mui/material'
+import {
+  Button,
+  ButtonGroup,
+  IconButton,
+  Typography,
+  styled,
+} from '@mui/material'
 import { Column, Flex, Row, Text } from '../styles'
 
 export const Mini = Object.assign(
@@ -12,21 +18,28 @@ export const Mini = Object.assign(
     '& > div': { flex: 1 },
   }),
   {
-    Button: styled(Button)(({ theme }) => ({
+    Button: styled(IconButton)(({ theme }) => ({
       color: theme.palette.text.primary,
       flex: 1,
-      height: '1.5rem',
       width: '100%',
-      minWidth: '1.5rem',
+      minWidth: 'unset',
       borderRadius: 4,
-      padding: '.5rem',
+      padding: 'unset',
       '&:hover': { background: 'rgba(255, 255, 255, 0.08)' },
     })),
 
     Header: styled(Row)(({ theme }) => ({
       color: theme.palette.text.primary,
       height: '2em',
+      maxHeight: 'calc(220px / 7)',
     })),
+
+    HeaderGroup: styled(ButtonGroup)({
+      boxShadow: 'unset',
+      flex: 1,
+      maxWidth: '100%',
+      width: '100%',
+    }),
 
     Text: styled(Text)(({ theme }) => ({
       fontSize: theme.fontSizes.sm,
@@ -39,25 +52,30 @@ export const Mini = Object.assign(
       justifyContent: 'center',
     })),
 
-    TitleButton: styled(Button)<{ controls?: boolean }>(
+    TitleButton: styled(IconButton)<{ controls?: boolean }>(
       ({ controls, theme }) => ({
+        backdropFilter: 'unset',
+        border: 'unset !important',
+        borderRadius: 4,
+        boxShadow: 'unset',
         color: theme.palette.text.primary,
         fontSize: theme.fontSizes.xs,
         fontWeight: theme.fontWeights.bold,
         justifyContent: !controls ? 'left' : undefined,
-        height: 30,
+        height: 'calc(220px / 7)',
         padding: controls ? 5 : undefined,
         textTransform: 'uppercase',
         whiteSpace: 'nowrap',
         width: controls ? 112 : '100%',
-        border: 'unset !important',
-        boxShadow: 'unset',
-        backdropFilter: 'unset',
         '&:hover': { border: 'unset', background: 'rgba(255, 255, 255, 0.08)' },
       })
     ),
 
-    Week: styled(Column)({ background: 'rgba(175, 175, 175, .25)' }),
+    Week: styled(Column)({
+      background: 'rgba(175, 175, 175, .25)',
+      // maxHeight: 'calc(220px / 7)',
+      maxWidth: 'calc(220px / 7)',
+    }),
 
     WeekText: styled(Text)<{ isMonth?: boolean }>(({ isMonth, theme }) => ({
       color: theme.palette.text.primary,

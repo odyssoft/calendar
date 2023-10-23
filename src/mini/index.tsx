@@ -44,7 +44,7 @@ export const MiniCalendar = ({
     <Mini.Header>
       {controls ? (
         <Column>
-          <ButtonGroup size='small' variant='contained'>
+          <Mini.HeaderGroup size='small' variant='contained'>
             <Mini.Button onClick={previousYear}>
               <KeyboardDoubleArrowLeftRounded />
             </Mini.Button>
@@ -58,7 +58,7 @@ export const MiniCalendar = ({
             <Mini.Button onClick={nextYear}>
               <KeyboardDoubleArrowRightRounded />
             </Mini.Button>
-          </ButtonGroup>
+          </Mini.HeaderGroup>
         </Column>
       ) : (
         <Mini.Title controls={controls}>{children}</Mini.Title>
@@ -99,7 +99,7 @@ export const MiniCalendar = ({
             </Mini.Week>
           )}
           {row.map((day) => (
-            <Column>
+            <Column style={{ width: `${220 / (week ? 8 : 7)}px` }}>
               <Mini.Button
                 onClick={() => dayClick?.(day.format('DD-MM-YYYY') as DateType)}
                 size='small'
