@@ -1,8 +1,23 @@
 import { Checkbox, FormControlLabel, styled } from '@mui/material'
+
 import { Flex } from '../styles'
 
-export const Sidebar = Object.assign(
-  styled(Flex)(({ theme }) => ({
+export const Sidebar = Object.assign(styled(Flex)({ flex: 1 }), {
+  Checkbox: styled(Checkbox)<{ color: string }>(({ color, theme }) => ({
+    color: theme.palette.text.primary,
+    padding: '.5rem',
+    '& > svg': { color },
+  })),
+
+  Content: styled(Flex)({ flex: 1 }),
+
+  ControlLabel: styled(FormControlLabel)({
+    '&:hover svg': {
+      opacity: 0.75,
+    },
+  }),
+
+  Nav: styled(Flex)(({ theme }) => ({
     backdropFilter: theme.filters.sm,
     flexDirection: 'column',
     padding: '.75rem .5rem',
@@ -10,18 +25,6 @@ export const Sidebar = Object.assign(
     maxHeight: '100%',
     overflowX: 'hidden',
     overflowY: 'auto',
+    background: 'red',
   })),
-  {
-    Checkbox: styled(Checkbox)<{ color: string }>(({ color, theme }) => ({
-      color: theme.palette.text.primary,
-      padding: '.5rem',
-      '& > svg': { color },
-    })),
-
-    ControlLabel: styled(FormControlLabel)({
-      '&:hover svg': {
-        opacity: 0.75,
-      },
-    }),
-  }
-)
+})
