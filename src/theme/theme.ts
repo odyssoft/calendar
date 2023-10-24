@@ -1,6 +1,13 @@
 import { createTheme } from '@mui/material'
 
 export const theme = createTheme({
+  boxShadows: {
+    xs: '0 2px 8px 1px rgb(0 0 0 / 0.07), 0 1px 1px -1px rgb(0 0 0 / 0.04)',
+    sm: '0 2px 8px 2px rgb(0 0 0 / 0.07), 0 2px 4px -1px rgb(0 0 0 / 0.04)',
+    md: '0 12px 20px 6px rgb(0 0 0 / 0.08)',
+    lg: '0 12px 34px 6px rgb(0 0 0 / 0.18)',
+    xl: '0 25px 65px 0px rgb(0 0 0 / 0.35)',
+  },
   colors: {
     border: 'rgba(255, 255, 255, 0.15)',
   },
@@ -46,6 +53,24 @@ export const theme = createTheme({
       secondary: '#A8A8B3',
       disabled: '#737380',
     },
+  },
+  space: {
+    0: '0rem',
+    xs: '0.5rem',
+    sm: '0.75rem',
+    md: '1rem',
+    lg: '1.375rem',
+    xl: '2.25rem',
+    1: '0.125rem',
+    2: '0.25rem',
+    3: '0.375rem',
+    4: '0.5rem',
+    5: '0.625rem',
+    6: '0.75rem',
+    7: '0.875rem',
+    8: '1rem',
+    9: '1.25rem',
+    10: '1.5rem',
   },
   textShadow: '0px 0px .25em black',
 })

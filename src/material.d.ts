@@ -5,6 +5,13 @@ import {
 
 declare module '@mui/material/styles' {
   interface Theme extends OldTheme {
+    boxShadows: {
+      xs: string
+      sm: string
+      md: string
+      lg: string
+      xl: string
+    }
     colors: {
       border: string
     }
@@ -39,11 +46,36 @@ declare module '@mui/material/styles' {
       bold: number
       extrabold: number
       black: number
+    }
+    space: {
+      0: string
+      xs: string
+      sm: string
+      md: string
+      lg: string
+      xl: string
+      1: string
+      2: string
+      3: string
+      4: string
+      5: string
+      6: string
+      7: string
+      8: string
+      9: string
+      10: string
     }
     textShadow: string
   }
   // allow configuration using `createTheme`
   interface ThemeOptions extends OldOptions {
+    boxShadows: {
+      xs: string
+      sm: string
+      md: string
+      lg: string
+      xl: string
+    }
     colors: {
       border: string
     }
@@ -78,6 +110,24 @@ declare module '@mui/material/styles' {
       bold: number
       extrabold: number
       black: number
+    }
+    space: {
+      0: string
+      xs: string
+      sm: string
+      md: string
+      lg: string
+      xl: string
+      1: string
+      2: string
+      3: string
+      4: string
+      5: string
+      6: string
+      7: string
+      8: string
+      9: string
+      10: string
     }
     textShadow: string
   }

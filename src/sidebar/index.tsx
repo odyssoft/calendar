@@ -1,22 +1,30 @@
 import React from 'react'
 import { useCalendar } from '../context'
 import { MiniCalendar } from '../mini'
-import { Flex } from '../styles'
 import { Sidebar } from './styles'
 
 export const CalendarSidebar = ({ children }: React.PropsWithChildren) => {
-  const { date, selectDay, setDate, sidebar } = useCalendar()
-  // if (!sidebar) return null
+  const { calendars, date, selectDay, setDate, sidebar } = useCalendar()
 
   return (
     <Sidebar>
-      <Sidebar.Nav>
+      <Sidebar.Nav visible={!!sidebar}>
         <MiniCalendar
           controls
           date={date.format('DD-MM-YYYY')}
           dayClick={selectDay}
           onChange={setDate}
         />
+        {calendars.map(({ color, id, name }) => (
+          <Sidebar.ControlLabel
+            background={color}
+            control={
+              <Sidebar.Checkbox background={color} defaultChecked value={id} />
+            }
+            key={id}
+            label={name}
+          />
+        ))}
       </Sidebar.Nav>
       <Sidebar.Content>{children}</Sidebar.Content>
     </Sidebar>
