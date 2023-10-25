@@ -4,6 +4,7 @@ import React from 'react'
 export type CalendarContext = {
   calendars: CalendarType[]
   date: moment.Moment
+  excluded: string[]
   month: CalendarDate[][]
   next: () => void
   previous: () => void
@@ -13,11 +14,14 @@ export type CalendarContext = {
   selectWeek: (week: string, year: string) => void
   selectedEvent?: ParsedEvent
   setDate: (date: moment.Moment) => void
+  setExcluded: (excluded: string[]) => void
   setView: (view: CalendarView) => void
   sidebar?: boolean
+  title: string
   toggleSidebar: () => void
   view: CalendarView
   week: CalendarDate[][]
+  year: moment.Moment[][]
 }
 
 export type CalendarDate = {

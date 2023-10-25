@@ -26,6 +26,8 @@ export default meta
 
 type Story = StoryObj<typeof CalendarSidebar>
 
+let excluded: string[] = []
+
 export const Sidebar: Story = {
   parameters: {
     calendar: {
@@ -37,6 +39,8 @@ export const Sidebar: Story = {
         { id: '5', name: 'Another Test Calendar', color: '#9DFFFF' },
       ],
       date: moment(),
+      excluded,
+      setExcluded: (value: string[]) => (excluded = value),
       sidebar: true,
     },
   },

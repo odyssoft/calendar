@@ -54,6 +54,7 @@ declare module '@mui/material/styles' {
       md: string
       lg: string
       xl: string
+      '2xl': string
       1: string
       2: string
       3: string
@@ -118,6 +119,7 @@ declare module '@mui/material/styles' {
       md: string
       lg: string
       xl: string
+      '2xl': string
       1: string
       2: string
       3: string

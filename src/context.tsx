@@ -3,6 +3,7 @@ import { ThemeProvider } from './theme'
 import {
   CalendarContext,
   CalendarProviderProps,
+  CalendarType,
   CalendarView,
   DateType,
   ParsedEvent,
@@ -16,6 +17,7 @@ const now = moment()
 export const Context = React.createContext<CalendarContext>({
   calendars: [],
   date: now,
+  excluded: [],
   month: [],
   next: empty,
   previous: empty,
@@ -24,10 +26,13 @@ export const Context = React.createContext<CalendarContext>({
   selectMonth: empty,
   selectWeek: empty,
   setDate: empty,
+  setExcluded: empty,
   setView: empty,
+  title: '',
   toggleSidebar: empty,
   view: 'month',
   week: [],
+  year: [],
 })
 
 export const CalendarProvider = ({ children, data }: CalendarProviderProps) => {
@@ -37,7 +42,15 @@ export const CalendarProvider = ({ children, data }: CalendarProviderProps) => {
   const [sidebar, setSidebar] = React.useState<boolean>()
   const [view, setView] = React.useState<CalendarView>('month')
 
-  const calendars = React.useMemo(() => [], [])
+  const calendars = React.useMemo(
+    () =>
+      Object.values(
+        data
+          .map(({ calendar }) => calendar)
+          .reduce((acc, cur) => ({ ...acc, [cur.id]: cur }), {})
+      ) as CalendarType[],
+    [data]
+  )
   const month = React.useMemo(
     () =>
       getMonthEvents({
@@ -79,6 +92,7 @@ export const CalendarProvider = ({ children, data }: CalendarProviderProps) => {
         value={{
           calendars,
           date,
+          excluded,
           month,
           next,
           previous,
@@ -88,11 +102,14 @@ export const CalendarProvider = ({ children, data }: CalendarProviderProps) => {
           selectWeek,
           selectedEvent,
           setDate,
+          setExcluded,
           setView,
           sidebar,
+          title,
           toggleSidebar: () => setSidebar(!sidebar),
           view,
           week,
+          year,
         }}
       >
         {children}

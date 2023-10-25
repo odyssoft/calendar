@@ -61,6 +61,7 @@ export const theme = createTheme({
     md: '1rem',
     lg: '1.375rem',
     xl: '2.25rem',
+    '2xl': '3rem',
     1: '0.125rem',
     2: '0.25rem',
     3: '0.375rem',

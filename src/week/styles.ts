@@ -10,6 +10,7 @@ export const Week = Object.assign(
     maxHeight: 42,
     minHeight: 42,
     minWidth: '100%',
+    width: 1106,
     overflow: 'visible',
     position: 'relative',
     '&::after, &::before': {

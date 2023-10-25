@@ -4,10 +4,11 @@ import { CalendarContainer } from './styles'
 import { CalendarHeader } from './header'
 import { CalendarSidebar } from './sidebar'
 import { CalendarBody } from './body'
+import { CalendarProps } from './types'
 
-export const Calendar = () => {
+export const Calendar = ({ data }: CalendarProps) => {
   return (
-    <CalendarProvider>
+    <CalendarProvider data={data}>
       <CalendarContainer>
         <CalendarHeader>
           <CalendarSidebar>

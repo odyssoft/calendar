@@ -4,7 +4,7 @@ import { CalendarBody } from './'
 import { ThemeProvider } from '../theme'
 import { Context } from '../context'
 import moment from 'moment'
-import { getMonthEvents, getWeek } from '../helper'
+import { getMonthEvents, getWeek, getYear } from '../helper'
 import { mockData } from '../mocks'
 import { CalendarView } from '../types'
 
@@ -61,4 +61,14 @@ export const Month: Story = {
     },
   },
 }
-export const Year: Story = { parameters: params('year') }
+
+export const Year: Story = {
+  parameters: {
+    calendar: {
+      data: [],
+      date,
+      view: 'year',
+      year: getYear(date),
+    },
+  },
+}
