@@ -1,7 +1,7 @@
 import moment from 'moment'
 import { CalendarEvent, DateType } from '../types'
 
-const calendars = [
+export const mockCalendars = [
   {
     name: "Seann's Calendar",
     color: '#009DFF',
@@ -29,7 +29,7 @@ const date = moment()
 export const mockData: CalendarEvent[] = [
   {
     allDay: true,
-    calendar: calendars[0],
+    calendar: mockCalendars[0],
     end: date.format('DD-MM-YYYY') as DateType,
     id: 'daily-0',
     start: date.format('DD-MM-YYYY') as DateType,
@@ -37,7 +37,7 @@ export const mockData: CalendarEvent[] = [
   },
   {
     allDay: true,
-    calendar: calendars[1],
+    calendar: mockCalendars[1],
     end: date
       .clone()
       .endOf('day')
@@ -53,7 +53,7 @@ export const mockData: CalendarEvent[] = [
   },
   {
     allDay: true,
-    calendar: calendars[3],
+    calendar: mockCalendars[3],
     end: date
       .clone()
       .endOf('day')
@@ -69,7 +69,7 @@ export const mockData: CalendarEvent[] = [
   },
   {
     allDay: true,
-    calendar: calendars[2],
+    calendar: mockCalendars[2],
     end: date
       .clone()
       .endOf('day')
@@ -92,7 +92,7 @@ export const mockData: CalendarEvent[] = [
       .add(12, 'hours')
       .format('DD-MM-YYYY HH:mm') as any,
     title: 'Hourly event 1 - 1 hours',
-    calendar: calendars[1],
+    calendar: mockCalendars[1],
   },
   {
     id: 'hourly-1',
@@ -107,7 +107,7 @@ export const mockData: CalendarEvent[] = [
       .add(45, 'minutes')
       .format('DD-MM-YYYY HH:mm') as any,
     title: 'Hourly event 2 - 1 hours',
-    calendar: calendars[0],
+    calendar: mockCalendars[0],
   },
   {
     id: 'hourly-2',
@@ -122,6 +122,6 @@ export const mockData: CalendarEvent[] = [
       .add(45, 'minutes')
       .format('DD-MM-YYYY HH:mm') as any,
     title: 'Hourly event 3 - 1 hours',
-    calendar: calendars[2],
+    calendar: mockCalendars[2],
   },
 ]
