@@ -1,12 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react'
-
-import { ThemeProvider } from '../theme'
-import { Context } from '../context'
-import { EditModal } from './'
-import { mockCalendars } from '../mocks'
 import moment from 'moment'
-import { LocalizationProvider } from '@mui/x-date-pickers'
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
+
+import { Context } from '../context'
+import { mockCalendars } from '../mocks'
+import { ThemeProvider } from '../theme'
+import { EditModal } from './'
 
 const meta: Meta<typeof EditModal> = {
   component: EditModal,
@@ -19,9 +17,7 @@ const meta: Meta<typeof EditModal> = {
     ),
     (Story, { parameters: { calendar } }) => (
       <Context.Provider value={calendar}>
-        <LocalizationProvider dateAdapter={AdapterMoment}>
-          <Story />
-        </LocalizationProvider>
+        <Story />
       </Context.Provider>
     ),
   ],

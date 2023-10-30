@@ -13,8 +13,6 @@ import { useCalendar } from '../context'
 import { Modal } from '../modal'
 import { Flex, Row } from '../styles'
 import { AbcRounded, CalendarMonthRounded } from '@mui/icons-material'
-import { DatePicker, TimePicker } from '@mui/x-date-pickers'
-import { DateRangePicker } from '@mui/x-date-pickers-pro'
 
 export const EditModal = () => {
   const { calendars, selectEvent, selectedEvent } = useCalendar()
@@ -24,10 +22,11 @@ export const EditModal = () => {
 
   const handleClose = () => selectEvent(undefined)
 
-  const DateRanges = () => <DateRangePicker />
+  const DateRanges = () => <div />
   const DateTimeRanges = () => (
     <Row>
-      <DatePicker label='Date' />
+      <div />
+      {/* <DatePicker label='Date' />
       <TimePicker
         label='Start'
         onAccept={(value: moment.Moment | null) =>
@@ -41,7 +40,7 @@ export const EditModal = () => {
           console.log(value, startTime)
           return startTime?.isAfter(value) ?? false
         }}
-      />
+      /> */}
     </Row>
   )
 

@@ -18,14 +18,49 @@ export const Mini = Object.assign(
     '& > div': { flex: 1 },
   }),
   {
-    Button: styled(IconButton)(({ theme }) => ({
+    Button: styled(IconButton)<{
+      between?: boolean
+      isFirst?: boolean
+      isLast?: boolean
+      selected?: boolean
+    }>(({ between, isFirst, isLast, selected, theme }) => ({
       color: theme.palette.text.primary,
       flex: 1,
       width: '100%',
       minWidth: 'unset',
       borderRadius: 4,
       padding: 'unset',
+      position: 'relative',
+      zIndex: 1,
       '&:hover': { background: 'rgba(255, 255, 255, 0.08)' },
+      ...(selected && {
+        '&:before': {
+          content: '""',
+          position: 'absolute',
+          top: '50%',
+          left: 'calc(50% - 1px)',
+          transform: 'translate(-50%, -50%)',
+          background: theme.palette.primary.main,
+          width: 25,
+          height: 25,
+          borderRadius: '50%',
+          zIndex: -1,
+        },
+      }),
+      ...(between && {
+        '&:before': {
+          content: '""',
+          position: 'absolute',
+          top: '50%',
+          left: isFirst ? -10 : 0,
+          transform: 'translateY(-50%)',
+          width: `calc(100% + ${isFirst || isLast ? 10 : 0}px)`,
+          height: 15,
+          background: theme.palette.primary.main,
+          opacity: 0.25,
+          zIndex: -2,
+        },
+      }),
     })),
 
     Header: styled(Row)(({ theme }) => ({

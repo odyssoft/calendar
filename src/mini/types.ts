@@ -1,5 +1,3 @@
-import moment from 'moment'
-
 import { DateType } from '../types'
 
 export type MiniCalendarProps = {
@@ -8,6 +6,7 @@ export type MiniCalendarProps = {
   dayClick?: (day: DateType) => void
   monthClick?: (date: DateType) => void
   onChange?: (date: moment.Moment) => void
+  selectedDates?: [moment.Moment] | [moment.Moment, moment.Moment]
   week?: boolean
   weekClick?: (week: string, year: string) => void
 }

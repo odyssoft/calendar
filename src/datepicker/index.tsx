@@ -7,7 +7,7 @@ import React from 'react'
 import { DateType } from '../types'
 
 export const DatePicker = () => {
-  const [value, setValue] = React.useState<DateType>()
+  const [value, setValue] = React.useState<DateType | ''>('')
 
   return (
     <Popover

@@ -21,6 +21,7 @@ export const MiniCalendar = ({
   dayClick,
   monthClick,
   onChange,
+  selectedDates,
   week,
   weekClick,
 }: MiniCalendarProps) => {
@@ -98,18 +99,32 @@ export const MiniCalendar = ({
               </Mini.Button>
             </Mini.Week>
           )}
-          {row.map((day) => (
-            <Column style={{ width: `${220 / (week ? 8 : 7)}px` }}>
-              <Mini.Button
-                onClick={() => dayClick?.(day.format('DD-MM-YYYY') as DateType)}
-                size='small'
-              >
-                <Mini.WeekText isMonth={day.isSame(date, 'month')}>
-                  {day.date()}
-                </Mini.WeekText>
-              </Mini.Button>
-            </Column>
-          ))}
+          {row.map((day, index) => {
+            const [start, end] = selectedDates || []
+            const selected = day.isSame(start, 'day') || day.isSame(end, 'day')
+            const first = day.clone().subtract(1, 'day').isSame(start, 'day')
+            const last = day.clone().add(1, 'day').isSame(end, 'day')
+            const between = day.isBetween(start, end, 'day')
+            return (
+              <Column style={{ width: `${220 / (week ? 8 : 7)}px` }}>
+                <Mini.Button
+                  between={between}
+                  isFirst={first}
+                  isLast={last}
+                  onClick={() =>
+                    dayClick?.(day.format('DD-MM-YYYY') as DateType)
+                  }
+                  size='small'
+                  selected={selected}
+                  style={{ zIndex: selected ? 7 : 7 - index }}
+                >
+                  <Mini.WeekText isMonth={day.isSame(date, 'month')}>
+                    {day.date()}
+                  </Mini.WeekText>
+                </Mini.Button>
+              </Column>
+            )
+          })}
         </Row>
       ))}
     </Mini>
