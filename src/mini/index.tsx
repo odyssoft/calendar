@@ -106,7 +106,12 @@ export const MiniCalendar = ({
             const last = day.clone().add(1, 'day').isSame(end, 'day')
             const between = day.isBetween(start, end, 'day')
             return (
-              <Column style={{ width: `${220 / (week ? 8 : 7)}px` }}>
+              <Mini.Column
+                between={between}
+                first={first}
+                last={last}
+                index={index}
+              >
                 <Mini.Button
                   between={between}
                   isFirst={first}
@@ -122,7 +127,7 @@ export const MiniCalendar = ({
                     {day.date()}
                   </Mini.WeekText>
                 </Mini.Button>
-              </Column>
+              </Mini.Column>
             )
           })}
         </Row>

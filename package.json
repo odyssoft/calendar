@@ -31,13 +31,13 @@
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.5",
-    "@storybook/addon-essentials": "^7.5.1",
-    "@storybook/addon-interactions": "^7.5.1",
-    "@storybook/addon-links": "^7.5.1",
+    "@storybook/addon-essentials": "^7.5.2",
+    "@storybook/addon-interactions": "^7.5.2",
+    "@storybook/addon-links": "^7.5.2",
     "@storybook/addon-onboarding": "^1.0.8",
-    "@storybook/blocks": "^7.5.1",
-    "@storybook/react": "^7.5.1",
-    "@storybook/react-webpack5": "^7.5.1",
+    "@storybook/blocks": "^7.5.2",
+    "@storybook/react": "^7.5.2",
+    "@storybook/react-webpack5": "^7.5.2",
     "@storybook/testing-library": "^0.2.2",
     "@types/node": "^20.8.7",
     "@types/react": "^18.2.31",
@@ -58,7 +58,7 @@
     "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
-    "storybook": "^7.5.1"
+    "storybook": "^7.5.2"
   },
   "peerDependencies": {
     "@emotion/react": "^11.11.1",

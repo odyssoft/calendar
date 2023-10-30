@@ -26,8 +26,12 @@ export const Mini = Object.assign(
     }>(({ between, isFirst, isLast, selected, theme }) => ({
       color: theme.palette.text.primary,
       flex: 1,
-      width: '100%',
+      width: 30,
+      maxWidth: 30,
+      height: 30,
+      maxHeight: 30,
       minWidth: 'unset',
+      minHeight: 'unset',
       borderRadius: 4,
       padding: 'unset',
       position: 'relative',
@@ -38,7 +42,7 @@ export const Mini = Object.assign(
           content: '""',
           position: 'absolute',
           top: '50%',
-          left: 'calc(50% - 1px)',
+          left: '50%',
           transform: 'translate(-50%, -50%)',
           background: theme.palette.primary.main,
           width: 25,
@@ -47,14 +51,27 @@ export const Mini = Object.assign(
           zIndex: -1,
         },
       }),
+    })),
+
+    Column: styled(Column)<{
+      between: boolean
+      first: boolean
+      index: number
+      last: boolean
+    }>(({ between, first, index, last, theme }) => ({
+      position: 'relative',
+      alignItems: 'center',
+      justifyContent: 'center',
       ...(between && {
         '&:before': {
           content: '""',
           position: 'absolute',
           top: '50%',
-          left: isFirst ? -10 : 0,
+          left: first ? -10 : 0,
           transform: 'translateY(-50%)',
-          width: `calc(100% + ${isFirst || isLast ? 10 : 0}px)`,
+          width: `calc(100% + ${
+            first || last ? 10 : (index + 1) % 2 === 0 ? 1 : 0
+          }px)`,
           height: 15,
           background: theme.palette.primary.main,
           opacity: 0.25,
@@ -109,12 +126,13 @@ export const Mini = Object.assign(
     Week: styled(Column)({
       background: 'rgba(175, 175, 175, .25)',
       // maxHeight: 'calc(220px / 7)',
+      // maxWidth: 'calc(220px / 7)',
       maxWidth: 'calc(220px / 7)',
     }),
 
     WeekText: styled(Text)<{ isMonth?: boolean }>(({ isMonth, theme }) => ({
       color: theme.palette.text.primary,
-      fontSize: theme.fontSizes.sm,
+      fontSize: theme.fontSizes.xs,
       fontWeight: theme.fontWeights.semibold,
       opacity: isMonth ? 1 : 0.25,
     })),
