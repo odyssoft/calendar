@@ -5,6 +5,8 @@ import { Context } from '../context'
 import { EditModal } from './'
 import { mockCalendars } from '../mocks'
 import moment from 'moment'
+import { LocalizationProvider } from '@mui/x-date-pickers'
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment'
 
 const meta: Meta<typeof EditModal> = {
   component: EditModal,
@@ -17,7 +19,9 @@ const meta: Meta<typeof EditModal> = {
     ),
     (Story, { parameters: { calendar } }) => (
       <Context.Provider value={calendar}>
-        <Story />
+        <LocalizationProvider dateAdapter={AdapterMoment}>
+          <Story />
+        </LocalizationProvider>
       </Context.Provider>
     ),
   ],

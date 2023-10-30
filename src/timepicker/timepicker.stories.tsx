@@ -1,12 +1,12 @@
 import { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 
-import { RangePicker } from '.'
+import { TimePicker } from '.'
 import { ThemeProvider } from '../theme'
 
 export default {
-  title: 'Components/Range Picker',
-  component: RangePicker,
+  title: 'Components/Time Picker',
+  component: TimePicker,
   decorators: [
     (Story) => (
       <ThemeProvider>
@@ -14,8 +14,8 @@ export default {
       </ThemeProvider>
     ),
   ],
-} as Meta<typeof RangePicker>
+} as Meta<typeof TimePicker>
 
-type Story = StoryObj<typeof RangePicker>
+type Story = StoryObj<typeof TimePicker>
 
-export const _RangePicker: Story = {}
+export const _TimePicker: Story = {}

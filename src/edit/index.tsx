@@ -11,15 +11,43 @@ import React from 'react'
 
 import { useCalendar } from '../context'
 import { Modal } from '../modal'
-import { Flex } from '../styles'
+import { Flex, Row } from '../styles'
 import { AbcRounded, CalendarMonthRounded } from '@mui/icons-material'
+import { DatePicker, TimePicker } from '@mui/x-date-pickers'
+import { DateRangePicker } from '@mui/x-date-pickers-pro'
 
 export const EditModal = () => {
   const { calendars, selectEvent, selectedEvent } = useCalendar()
   const [allDay, setAllDay] = React.useState(selectedEvent?.allDay)
   const [calendar, setCalendar] = React.useState(selectedEvent?.calendar.id)
+  const [startTime, setStartTime] = React.useState<moment.Moment>()
 
   const handleClose = () => selectEvent(undefined)
+
+  const DateRanges = () => <DateRangePicker />
+  const DateTimeRanges = () => (
+    <Row>
+      <DatePicker label='Date' />
+      <TimePicker
+        label='Start'
+        onAccept={(value: moment.Moment | null) =>
+          setStartTime(value ?? undefined)
+        }
+        value={startTime}
+      />
+      <TimePicker
+        label='End'
+        shouldDisableTime={(value: moment.Moment) => {
+          console.log(value, startTime)
+          return startTime?.isAfter(value) ?? false
+        }}
+      />
+    </Row>
+  )
+
+  React.useEffect(() => {
+    console.log({ startTime })
+  }, [startTime])
 
   return (
     <Modal
@@ -38,7 +66,7 @@ export const EditModal = () => {
             InputProps={{
               startAdornment: <AbcRounded />,
             }}
-            type='datetime-local'
+            type='text'
             variant='standard'
             defaultValue={selectedEvent?.title}
           />
@@ -71,7 +99,8 @@ export const EditModal = () => {
           }
           label='All Day'
         />
-        {(['start', 'end'] as ('start' | 'end')[]).map((key) => (
+        {allDay ? <DateRanges /> : <DateTimeRanges />}
+        {/* {(['start', 'end'] as ('start' | 'end')[]).map((key) => (
           <FormControl fullWidth key={key}>
             <TextField
               label={key.charAt(0).toUpperCase() + key.slice(1)}
@@ -83,9 +112,8 @@ export const EditModal = () => {
               variant='standard'
               defaultValue={selectedEvent?.title}
             />
-            {/* Create dropdown for time selection... */}
           </FormControl>
-        ))}
+        ))} */}
       </Flex>
     </Modal>
   )

@@ -7,7 +7,7 @@
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:jest/recommended",
-    "plugin:react/jsx-runtime",
+    "plugin:react/jsx-runtime"
   ],
   "parserOptions": {
     "ecmaVersion": 2020,

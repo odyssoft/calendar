@@ -1,19 +1,23 @@
 import React from 'react'
 import { Base } from './styles'
+import { PopoverProps } from './types'
+import { ModalProps } from '@mui/material'
 
 export const Popover = ({
   children,
   content,
-}: {
-  children: any
-  content: any
-}) => {
+  onClose,
+  ...rest
+}: PopoverProps) => {
   const [anchor, setAnchor] = React.useState<any>()
 
   const handleClick = ({ currentTarget }: React.MouseEvent<any>) =>
     setAnchor(currentTarget)
 
-  const handleClose = () => setAnchor(undefined)
+  const handleClose: ModalProps['onClose'] = (...props) => {
+    setAnchor(undefined)
+    onClose?.(...props)
+  }
 
   const open = Boolean(anchor)
 
@@ -34,6 +38,7 @@ export const Popover = ({
           horizontal: 'left',
           vertical: 'center',
         }}
+        {...rest}
       >
         {content}
       </Base>
