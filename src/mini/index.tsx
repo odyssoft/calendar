@@ -1,19 +1,15 @@
-import { ButtonGroup } from '@mui/material'
-import {
-  ChevronLeftRounded,
-  ChevronRightRounded,
-  KeyboardDoubleArrowLeftRounded,
-  KeyboardDoubleArrowRightRounded,
-} from '@mui/icons-material'
 import moment from 'moment'
 import React from 'react'
 
 import { DAYS } from '../constants'
+import { getMonth } from '../helper'
 import { Column, Row } from '../styles'
 import { DateType } from '../types'
+import { MiniHeader } from './header'
 import { Mini } from './styles'
 import { MiniCalendarProps } from './types'
-import { getMonth } from '../helper'
+import { MiniWeek } from './week'
+import { MiniDay } from './day'
 
 export const MiniCalendar = ({
   controls,
@@ -32,51 +28,20 @@ export const MiniCalendar = ({
   const items = React.useMemo(() => getMonth(date), [date])
   const title = React.useMemo(() => date.format('MMMM YYYY'), [date])
 
-  const nextMonth = () => setDate(date.clone().add(1, 'month'))
-  const nextYear = () => setDate(date.clone().add(1, 'year'))
-  const previousMonth = () => setDate(date.clone().subtract(1, 'month'))
-  const previousYear = () => setDate(date.clone().subtract(1, 'year'))
-
   React.useEffect(() => {
     onChange?.(date)
   }, [date])
 
-  const Header = ({ children }: React.PropsWithChildren) => (
-    <Mini.Header>
-      {controls ? (
-        <Column>
-          <Mini.HeaderGroup size='small' variant='contained'>
-            <Mini.Button onClick={previousYear}>
-              <KeyboardDoubleArrowLeftRounded />
-            </Mini.Button>
-            <Mini.Button onClick={previousMonth}>
-              <ChevronLeftRounded />
-            </Mini.Button>
-            {children}
-            <Mini.Button onClick={nextMonth}>
-              <ChevronRightRounded />
-            </Mini.Button>
-            <Mini.Button onClick={nextYear}>
-              <KeyboardDoubleArrowRightRounded />
-            </Mini.Button>
-          </Mini.HeaderGroup>
-        </Column>
-      ) : (
-        <Mini.Title controls={controls}>{children}</Mini.Title>
-      )}
-    </Mini.Header>
-  )
-
   return (
-    <Mini>
-      <Header>
+    <Mini week={!!week}>
+      <MiniHeader controls={controls} date={date} setDate={setDate}>
         <Mini.TitleButton
           controls={controls}
           onClick={() => monthClick?.(date.format('DD-MM-YYYY') as DateType)}
         >
           {title}
         </Mini.TitleButton>
-      </Header>
+      </MiniHeader>
       <Row>
         {week && <Column />}
         {DAYS.map((day) => (
@@ -87,49 +52,16 @@ export const MiniCalendar = ({
       </Row>
       {items.map((row) => (
         <Row key={row[0].format('DDMMYYYY')}>
-          {week && (
-            <Mini.Week>
-              <Mini.Button
-                onClick={() =>
-                  weekClick?.(row[0].format('ww'), row[0].format('YYYY'))
-                }
-                size='small'
-              >
-                <Mini.WeekText>{row[0].format('ww')}</Mini.WeekText>
-              </Mini.Button>
-            </Mini.Week>
-          )}
-          {row.map((day, index) => {
-            const [start, end] = selectedDates || []
-            const selected = day.isSame(start, 'day') || day.isSame(end, 'day')
-            const first = day.clone().subtract(1, 'day').isSame(start, 'day')
-            const last = day.clone().add(1, 'day').isSame(end, 'day')
-            const between = day.isBetween(start, end, 'day')
-            return (
-              <Mini.Column
-                between={between}
-                first={first}
-                last={last}
-                index={index}
-              >
-                <Mini.Button
-                  between={between}
-                  isFirst={first}
-                  isLast={last}
-                  onClick={() =>
-                    dayClick?.(day.format('DD-MM-YYYY') as DateType)
-                  }
-                  size='small'
-                  selected={selected}
-                  style={{ zIndex: selected ? 7 : 7 - index }}
-                >
-                  <Mini.WeekText isMonth={day.isSame(date, 'month')}>
-                    {day.date()}
-                  </Mini.WeekText>
-                </Mini.Button>
-              </Mini.Column>
-            )
-          })}
+          {week && <MiniWeek date={row[0]} onClick={weekClick} />}
+          {row.map((day, index) => (
+            <MiniDay
+              key={day.format('DDMMYYYY')}
+              day={day}
+              index={index}
+              onClick={dayClick}
+              selectedDates={selectedDates}
+            />
+          ))}
         </Row>
       ))}
     </Mini>

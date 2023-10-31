@@ -23,13 +23,13 @@ type Story = StoryObj<typeof MiniCalendar>
 
 export const Mini: Story = {}
 
-export const selectedDates: Story = {
+export const selectedDate: Story = {
   args: {
     selectedDates: [now],
   },
 }
 
-export const selectedDatess: Story = {
+export const selectedDates: Story = {
   args: {
     selectedDates: [now, now.clone().add(9, 'days')],
   },
