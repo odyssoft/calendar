@@ -1,27 +1,46 @@
-import { TextField } from '@mui/material'
-import { Flex } from '../styles'
 import { CalendarMonthRounded } from '@mui/icons-material'
-import { Popover } from '../popover'
-import { MiniCalendar } from '../mini'
+import { TextField } from '@mui/material'
 import React from 'react'
-import { DateType } from '../types'
 
-export const DatePicker = () => {
-  const [value, setValue] = React.useState<DateType | ''>('')
+import { MiniCalendar } from '../mini'
+import { Popover } from '../popover'
+import { DateType } from '../types'
+import { DatePickerProps } from './types'
+
+export const DatePicker = ({
+  defaultValue,
+  onChange,
+  ...rest
+}: DatePickerProps) => {
+  const [open, setOpen] = React.useState(false)
+  const [value, setValue] = React.useState<DateType | undefined>(defaultValue)
+
+  const handleChange = (date: DateType) => {
+    setOpen(false)
+    setValue(date)
+    onChange?.(date)
+  }
+
+  const handleClick = () => setOpen(true)
+
+  const handleClose = () => setOpen(false)
 
   return (
     <Popover
       content={
-        <Flex>
-          <MiniCalendar dayClick={setValue} controls />
-        </Flex>
+        <MiniCalendar dayClick={handleChange} controls selectedDate={value} />
       }
+      open={open}
+      onClick={handleClick}
+      onClose={handleClose}
     >
       <TextField
-        InputProps={{ startAdornment: <CalendarMonthRounded /> }}
+        InputProps={{
+          startAdornment: <CalendarMonthRounded />,
+          ...rest.InputProps,
+        }}
         type='text'
-        label='Start'
-        value={value}
+        {...rest}
       />
     </Popover>
   )

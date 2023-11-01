@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { MiniCalendar } from './'
 import { ThemeProvider } from '../theme'
 import moment from 'moment'
+import { DateType } from '../types'
 
 const meta: Meta<typeof MiniCalendar> = {
   component: MiniCalendar,
@@ -17,7 +18,7 @@ const meta: Meta<typeof MiniCalendar> = {
 }
 
 export default meta
-const now = moment().subtract(14, 'days')
+const now = moment()
 
 type Story = StoryObj<typeof MiniCalendar>
 
@@ -25,12 +26,6 @@ export const Mini: Story = {}
 
 export const selectedDate: Story = {
   args: {
-    selectedDates: [now],
-  },
-}
-
-export const selectedDates: Story = {
-  args: {
-    selectedDates: [now, now.clone().add(9, 'days')],
+    selectedDate: now.format('DD-MM-YYYY') as DateType,
   },
 }

@@ -1,6 +1,7 @@
-import React from 'react'
-import { DateType } from '../types'
 import moment from 'moment'
+import React from 'react'
+
+import { DateType } from '../types'
 
 export type MiniCalendarProps = {
   controls?: boolean
@@ -8,7 +9,7 @@ export type MiniCalendarProps = {
   dayClick?: (day: DateType) => void
   monthClick?: (date: DateType) => void
   onChange?: (date: moment.Moment) => void
-  selectedDates?: SelectedDates
+  selectedDate?: DateType
   week?: boolean
   weekClick?: (week: string, year: string) => void
 }
@@ -17,7 +18,7 @@ export type MiniDayProps = {
   day: moment.Moment
   index: number
   onClick?: (day: DateType) => void
-  selectedDates?: SelectedDates
+  selectedDate?: DateType
 }
 
 export type MiniHeaderProps = React.PropsWithChildren<{
@@ -30,5 +31,3 @@ export type MiniWeekProps = {
   date: moment.Moment
   onClick?: (week: string, year: string) => void
 }
-
-type SelectedDates = [moment.Moment] | [moment.Moment, moment.Moment]

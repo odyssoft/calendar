@@ -17,37 +17,11 @@ const Button = styled(IconButton)(({ theme }) => ({
 }))
 
 export const Day = Object.assign(
-  styled(Column)<{
-    between: boolean
-    first: boolean
-    last: boolean
-  }>(({ between, first, last, theme }) => ({
+  styled(Column)({
     position: 'relative',
     alignItems: 'center',
     justifyContent: 'center',
-    ...(between && {
-      '&:before': {
-        content: '""',
-        position: 'absolute',
-        top: '50%',
-        left: first ? -30 : 0,
-        transform: 'translateY(-50%)',
-        width: `calc(100% + ${first || last ? 30 : 0}px)`,
-        ...(first && {
-          borderTopLeftRadius: 15,
-          borderBottomLeftRadius: 15,
-        }),
-        ...(last && {
-          borderTopRightRadius: 15,
-          borderBottomRightRadius: 15,
-        }),
-        height: 27,
-        background: theme.palette.primary.main,
-        opacity: 0.25,
-        zIndex: -2,
-      },
-    }),
-  })),
+  }),
   {
     Button: styled(Button)<{
       index: number

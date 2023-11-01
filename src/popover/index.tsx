@@ -6,20 +6,28 @@ import { ModalProps } from '@mui/material'
 export const Popover = ({
   children,
   content,
+  onClick,
   onClose,
+  open: isOpen,
   ...rest
 }: PopoverProps) => {
   const [anchor, setAnchor] = React.useState<any>()
 
-  const handleClick = ({ currentTarget }: React.MouseEvent<any>) =>
-    setAnchor(currentTarget)
+  const handleClick = (event: React.MouseEvent<any>) => {
+    setAnchor(event.currentTarget)
+    onClick?.(event)
+  }
 
   const handleClose: ModalProps['onClose'] = (...props) => {
     setAnchor(undefined)
     onClose?.(...props)
   }
 
-  const open = Boolean(anchor)
+  const open = React.useMemo(() => isOpen || !!anchor, [isOpen, anchor])
+
+  React.useEffect(() => {
+    isOpen === false && !!anchor && setAnchor(undefined)
+  }, [isOpen])
 
   return (
     <div>
@@ -31,12 +39,12 @@ export const Popover = ({
       )}
       <Base
         id='popover'
-        open={open}
+        open={!!open}
         anchorEl={anchor!}
         onClose={handleClose}
         anchorOrigin={{
           horizontal: 'left',
-          vertical: 'center',
+          vertical: 'bottom',
         }}
         {...rest}
       >

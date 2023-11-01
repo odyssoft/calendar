@@ -17,7 +17,7 @@ export const MiniCalendar = ({
   dayClick,
   monthClick,
   onChange,
-  selectedDates,
+  selectedDate,
   week,
   weekClick,
 }: MiniCalendarProps) => {
@@ -59,7 +59,7 @@ export const MiniCalendar = ({
               day={day}
               index={index}
               onClick={dayClick}
-              selectedDates={selectedDates}
+              selectedDate={selectedDate}
             />
           ))}
         </Row>
