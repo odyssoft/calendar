@@ -3,9 +3,9 @@ import { MiniProvider } from './context'
 import { Days } from './days'
 import { MiniHeader } from './header'
 import { Container } from './styles'
-import { MiniContext } from './types'
+import { MiniCalendarProps } from './types'
 
-export const MiniCalendar = (props: MiniContext) => (
+export const MiniCalendar = (props: MiniCalendarProps) => (
   <MiniProvider {...props}>
     <Container week={!!props.week}>
       <MiniHeader />

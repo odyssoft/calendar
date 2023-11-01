@@ -1,7 +1,8 @@
 import React from 'react'
 import { TimePickerProps, TimeRangeValue } from './types'
 import { Popover } from '../popover'
-import { TextField } from '@mui/material'
+import { Menu, MenuItem, Select, TextField } from '@mui/material'
+import { Flex } from '../styles'
 
 export const TimePicker = ({
   defaultValue,
@@ -34,7 +35,19 @@ export const TimePicker = ({
 
   return (
     <>
-      <Popover content={<div />}>
+      <Popover
+        content={
+          <Flex>
+            <Menu open={true}>
+              {Array.from({ length: 24 }, (_, i) => i).map((hour) => (
+                <MenuItem key={hour} value={hour}>
+                  {hour}
+                </MenuItem>
+              ))}
+            </Menu>
+          </Flex>
+        }
+      >
         <TextField
           disabled={disabled}
           label='Start'

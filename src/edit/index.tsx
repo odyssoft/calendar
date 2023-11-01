@@ -13,6 +13,7 @@ import { useCalendar } from '../context'
 import { Modal } from '../modal'
 import { Flex, Row } from '../styles'
 import { AbcRounded, CalendarMonthRounded } from '@mui/icons-material'
+import { DatePicker } from '../datepicker'
 
 export const EditModal = () => {
   const { calendars, selectEvent, selectedEvent } = useCalendar()
@@ -98,7 +99,18 @@ export const EditModal = () => {
           }
           label='All Day'
         />
-        {allDay ? <DateRanges /> : <DateTimeRanges />}
+        <Row>
+          <DatePicker
+            label={allDay ? 'Start' : 'Date'}
+            name='start'
+            variant='standard'
+          />
+          {allDay ? (
+            <DatePicker label='End' name='end' variant='standard' />
+          ) : (
+            <DateTimeRanges />
+          )}
+        </Row>
         {/* {(['start', 'end'] as ('start' | 'end')[]).map((key) => (
           <FormControl fullWidth key={key}>
             <TextField

@@ -40,6 +40,7 @@ export const DatePicker = ({
           ...rest.InputProps,
         }}
         type='text'
+        value={value}
         {...rest}
       />
     </Popover>
