@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { MiniCalendar } from './'
-import { ThemeProvider } from '../theme'
 import moment from 'moment'
+import { MiniCalendar } from '.'
+import { ThemeProvider } from '../theme'
 import { DateType } from '../types'
 
 const meta: Meta<typeof MiniCalendar> = {
   component: MiniCalendar,
-  title: 'Calendar/Mini',
+  title: 'Calendar/MiniCopy',
   decorators: [
     (Story) => (
       <ThemeProvider>
