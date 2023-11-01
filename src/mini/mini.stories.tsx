@@ -7,7 +7,7 @@ import { DateType } from '../types'
 
 const meta: Meta<typeof MiniCalendar> = {
   component: MiniCalendar,
-  title: 'Calendar/MiniCopy',
+  title: 'Calendar/Mini',
   decorators: [
     (Story) => (
       <ThemeProvider>
