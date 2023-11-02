@@ -1,3 +1,4 @@
+import { AbcRounded } from '@mui/icons-material'
 import {
   Checkbox,
   FormControl,
@@ -10,43 +11,46 @@ import {
 import React from 'react'
 
 import { useCalendar } from '../context'
-import { Modal } from '../modal'
-import { Flex, Row } from '../styles'
-import { AbcRounded, CalendarMonthRounded } from '@mui/icons-material'
 import { DatePicker } from '../datepicker'
+import { Modal } from '../modal'
+import { Flex } from '../styles'
+import { TimePicker } from '../timepicker'
+import { TimeType } from '../types'
+import { REPEAT } from '../constants'
 
 export const EditModal = () => {
   const { calendars, selectEvent, selectedEvent } = useCalendar()
-  const [allDay, setAllDay] = React.useState(selectedEvent?.allDay)
+  const [allDay, setAllDay] = React.useState(!!selectedEvent?.allDay)
   const [calendar, setCalendar] = React.useState(selectedEvent?.calendar.id)
-  const [startTime, setStartTime] = React.useState<moment.Moment>()
+  const [endTime, setEndTime] = React.useState<TimeType>()
+  const [startTime, setStartTime] = React.useState<TimeType>()
+  const [repeat, setRepeat] = React.useState<string>('')
 
   const handleClose = () => selectEvent(undefined)
 
-  const DateRanges = () => <div />
   const DateTimeRanges = () => (
-    <Row>
-      <div />
-      {/* <DatePicker label='Date' />
+    <>
       <TimePicker
-        label='Start'
-        onAccept={(value: moment.Moment | null) =>
-          setStartTime(value ?? undefined)
-        }
-        value={startTime}
+        defaultValue={startTime}
+        label='Start Time'
+        name='start'
+        onChange={setStartTime}
+        style={{ maxWidth: 115 }}
+        variant='standard'
       />
       <TimePicker
-        label='End'
-        shouldDisableTime={(value: moment.Moment) => {
-          console.log(value, startTime)
-          return startTime?.isAfter(value) ?? false
-        }}
-      /> */}
-    </Row>
+        defaultValue={endTime}
+        label='End Time'
+        name='end'
+        onChange={setEndTime}
+        style={{ maxWidth: 115 }}
+        variant='standard'
+      />
+    </>
   )
 
   React.useEffect(() => {
-    console.log({ startTime })
+    console.log({ endTime, startTime })
   }, [startTime])
 
   return (
@@ -63,9 +67,7 @@ export const EditModal = () => {
             name='name'
             placeholder='Enter event name.'
             required
-            InputProps={{
-              startAdornment: <AbcRounded />,
-            }}
+            InputProps={{ startAdornment: <AbcRounded /> }}
             type='text'
             variant='standard'
             defaultValue={selectedEvent?.title}
@@ -93,38 +95,43 @@ export const EditModal = () => {
         <FormControlLabel
           control={
             <Checkbox
-              checked={allDay}
               onChange={({ target: { checked } }) => setAllDay(checked)}
             />
           }
+          onChange={console.log}
+          checked={allDay}
           label='All Day'
         />
-        <Row>
-          <DatePicker
-            label={allDay ? 'Start' : 'Date'}
-            name='start'
+        <DatePicker
+          fullWidth={!allDay}
+          label={allDay ? 'Start' : 'Date'}
+          name='start'
+          variant='standard'
+        />
+        {allDay ? (
+          <DatePicker label='End' name='end' variant='standard' />
+        ) : (
+          <DateTimeRanges />
+        )}
+        <FormControl fullWidth>
+          <InputLabel id='select-repeat-label' variant='standard'>
+            Repeat
+          </InputLabel>
+          <Select
+            labelId='select-repeat-label'
+            id='select-repeat'
+            value={repeat}
+            label='repeat'
+            onChange={({ target: { value } }) => setRepeat(value)}
             variant='standard'
-          />
-          {allDay ? (
-            <DatePicker label='End' name='end' variant='standard' />
-          ) : (
-            <DateTimeRanges />
-          )}
-        </Row>
-        {/* {(['start', 'end'] as ('start' | 'end')[]).map((key) => (
-          <FormControl fullWidth key={key}>
-            <TextField
-              label={key.charAt(0).toUpperCase() + key.slice(1)}
-              name={key}
-              placeholder='Enter event name.'
-              required
-              InputProps={{ startAdornment: <CalendarMonthRounded /> }}
-              type='date'
-              variant='standard'
-              defaultValue={selectedEvent?.title}
-            />
-          </FormControl>
-        ))} */}
+          >
+            {REPEAT.map((rep) => (
+              <MenuItem key={rep} value={rep}>
+                {rep}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
       </Flex>
     </Modal>
   )

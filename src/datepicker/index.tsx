@@ -13,7 +13,7 @@ export const DatePicker = ({
   ...rest
 }: DatePickerProps) => {
   const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState<DateType | undefined>(defaultValue)
+  const [value, setValue] = React.useState<DateType>('')
 
   const handleChange = (date: DateType) => {
     setOpen(false)
@@ -24,6 +24,10 @@ export const DatePicker = ({
   const handleClick = () => setOpen(true)
 
   const handleClose = () => setOpen(false)
+
+  React.useEffect(() => {
+    setValue(defaultValue ?? '')
+  }, [defaultValue])
 
   return (
     <Popover
@@ -36,7 +40,7 @@ export const DatePicker = ({
     >
       <TextField
         InputProps={{
-          startAdornment: <CalendarMonthRounded />,
+          startAdornment: <CalendarMonthRounded sx={{ mr: 0.5 }} />,
           ...rest.InputProps,
         }}
         type='text'

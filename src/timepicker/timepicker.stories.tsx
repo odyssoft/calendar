@@ -18,4 +18,8 @@ export default {
 
 type Story = StoryObj<typeof TimePicker>
 
-export const _TimePicker: Story = {}
+export const _TimePicker: Story = {
+  args: {
+    onChange: console.log,
+  },
+}

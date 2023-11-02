@@ -1,58 +1,53 @@
+import { TextField } from '@mui/material'
 import React from 'react'
-import { TimePickerProps, TimeRangeValue } from './types'
+
 import { Popover } from '../popover'
-import { Menu, MenuItem, Select, TextField } from '@mui/material'
-import { Flex } from '../styles'
+import { TimePickerProps } from './types'
+import { Time } from './time'
+import { AccessTime } from '@mui/icons-material'
+import { TimeType } from '../types'
 
 export const TimePicker = ({
-  defaultValue,
-  disabled,
+  defaultValue = '00:00',
   disabledTime,
   hourStep,
-  minuteStep,
+  minuteStep = 5,
   onChange,
-  placeholder,
+  ...rest
 }: TimePickerProps) => {
-  const [end, setEnd] = React.useState<string>()
-  const [start, setStart] = React.useState<string>()
+  const [open, setOpen] = React.useState(false)
+  const [value, setValue] = React.useState<TimeType>('')
 
-  const setDefaultValue = (value: TimeRangeValue) => {
-    if (typeof value === 'string') return setStart(value)
-    if (Array.isArray(value)) return setFromArray(value)
-    const { end: e, start: s } = value
-    setEnd(e)
-    setStart(s)
+  const handleChange = (time: TimeType = '') => {
+    setOpen(false)
+    setValue(time)
+    onChange?.(time)
   }
 
-  const setFromArray = (value: string[]) => {
-    if (value.length > 0) setStart(value[0])
-    value.length > 1 && setEnd(value[1])
-  }
+  const handleClick = () => setOpen(true)
+
+  const handleClose = () => setOpen(false)
 
   React.useEffect(() => {
-    defaultValue && setDefaultValue(defaultValue)
+    setValue(defaultValue ?? '')
   }, [defaultValue])
 
   return (
     <>
       <Popover
-        content={
-          <Flex>
-            <Menu open={true}>
-              {Array.from({ length: 24 }, (_, i) => i).map((hour) => (
-                <MenuItem key={hour} value={hour}>
-                  {hour}
-                </MenuItem>
-              ))}
-            </Menu>
-          </Flex>
-        }
+        content={<Time onChange={handleChange} value={value} />}
+        open={open}
+        onClick={handleClick}
+        onClose={handleClose}
       >
         <TextField
-          disabled={disabled}
-          label='Start'
+          InputProps={{
+            startAdornment: <AccessTime sx={{ mr: 0.5 }} />,
+            ...rest.InputProps,
+          }}
           type='text'
-          value={start}
+          value={value}
+          {...rest}
         />
       </Popover>
     </>

@@ -58,7 +58,8 @@ export type DateKey = DateType | DateTimeType
 export type DateTimeType = `${DateType} ${TimeType}`
 
 export type DateType =
-  `${number}${number}-${number}${number}-${number}${number}${number}${number}`
+  | `${number}${number}-${number}${number}-${number}${number}${number}${number}`
+  | ''
 
 export type EventType = 'allDay' | 'hourly'
 
@@ -67,7 +68,7 @@ export type Events = {
 }
 
 export type EventsType = {
-  [key: DateKey]: Events
+  [key in DateKey]: Events
 }
 
 export interface FlexProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -100,4 +101,4 @@ export type ParsedEvent = CalendarEvent & {
   isStart?: boolean
 }
 
-export type TimeType = `${number}${number}:${number}${number}`
+export type TimeType = `${number}:${number}` | ''

@@ -10,4 +10,13 @@ export const DAYS = [
   'Saturday',
 ]
 
+export const REPEAT = [
+  'Never',
+  'Daily',
+  'Weekly',
+  'Monthly',
+  'Yearly',
+  'Custom',
+]
+
 export const VIEWS: CalendarView[] = ['day', 'week', 'month', 'year']
