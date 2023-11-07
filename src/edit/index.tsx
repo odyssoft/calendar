@@ -10,13 +10,13 @@ import {
 } from '@mui/material'
 import React from 'react'
 
+import { REPEAT } from '../constants'
 import { useCalendar } from '../context'
 import { DatePicker } from '../datepicker'
 import { Modal } from '../modal'
-import { Flex } from '../styles'
-import { TimePicker } from '../timepicker'
+import { Flex, Row } from '../styles'
 import { TimeType } from '../types'
-import { REPEAT } from '../constants'
+import { DateRangePicker, TimeRangePicker } from '../rangePicker'
 
 export const EditModal = () => {
   const { calendars, selectEvent, selectedEvent } = useCalendar()
@@ -29,29 +29,22 @@ export const EditModal = () => {
   const handleClose = () => selectEvent(undefined)
 
   const DateTimeRanges = () => (
-    <>
-      <TimePicker
-        defaultValue={startTime}
-        label='Start Time'
+    <Row style={{ gap: '.5rem' }}>
+      <DatePicker
+        fullWidth={!allDay}
+        label={allDay ? 'Start' : 'Date'}
         name='start'
-        onChange={setStartTime}
-        style={{ maxWidth: 115 }}
         variant='standard'
       />
-      <TimePicker
-        defaultValue={endTime}
-        label='End Time'
-        name='end'
-        onChange={setEndTime}
-        style={{ maxWidth: 115 }}
-        variant='standard'
+      <TimeRangePicker
+        timePickerProps={{
+          style: {
+            maxWidth: 109,
+          },
+        }}
       />
-    </>
+    </Row>
   )
-
-  React.useEffect(() => {
-    console.log({ endTime, startTime })
-  }, [startTime])
 
   return (
     <Modal
@@ -63,14 +56,14 @@ export const EditModal = () => {
       <Flex direction='column' style={{ gap: '.5rem' }}>
         <FormControl fullWidth>
           <TextField
+            defaultValue={selectedEvent?.title}
             label='Name'
             name='name'
             placeholder='Enter event name.'
             required
-            InputProps={{ startAdornment: <AbcRounded /> }}
+            // InputProps={{ startAdornment: <AbcRounded /> }}
             type='text'
             variant='standard'
-            defaultValue={selectedEvent?.title}
           />
         </FormControl>
         <FormControl fullWidth>
@@ -102,18 +95,8 @@ export const EditModal = () => {
           checked={allDay}
           label='All Day'
         />
-        <DatePicker
-          fullWidth={!allDay}
-          label={allDay ? 'Start' : 'Date'}
-          name='start'
-          variant='standard'
-        />
-        {allDay ? (
-          <DatePicker label='End' name='end' variant='standard' />
-        ) : (
-          <DateTimeRanges />
-        )}
-        <FormControl fullWidth>
+        {allDay ? <DateRangePicker /> : <DateTimeRanges />}
+        {/* <FormControl fullWidth>
           <InputLabel id='select-repeat-label' variant='standard'>
             Repeat
           </InputLabel>
@@ -131,7 +114,7 @@ export const EditModal = () => {
               </MenuItem>
             ))}
           </Select>
-        </FormControl>
+        </FormControl> */}
       </Flex>
     </Modal>
   )

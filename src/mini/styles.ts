@@ -53,18 +53,24 @@ export const Day = Object.assign(
         zIndex: -1,
         transition: 'opacity 0.25s ease-in-out',
       },
-      '&:hover': {
+      '&:disabled': {
+        background: 'unset',
+        cursor: 'unset !important',
+      },
+      '&:not(:disabled):hover': {
         background: 'unset',
         '&:before': { opacity: 1 },
       },
     })),
 
-    Text: styled(Text)<{ month: boolean }>(({ month, theme }) => ({
-      color: theme.palette.text.primary,
-      fontSize: theme.fontSizes.xs,
-      fontWeight: theme.fontWeights.semibold,
-      opacity: month ? 1 : 0.25,
-    })),
+    Text: styled(Text)<{ disabled: boolean; month: boolean }>(
+      ({ disabled, month, theme }) => ({
+        color: theme.palette.text.primary,
+        fontSize: theme.fontSizes.xs,
+        fontWeight: theme.fontWeights.semibold,
+        opacity: !month || disabled ? 0.25 : 1,
+      })
+    ),
   }
 )
 

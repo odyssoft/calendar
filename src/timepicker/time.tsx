@@ -4,7 +4,7 @@ import { Row } from '../styles'
 import { Picker } from './styles'
 import { TimeProps } from './types'
 
-export const Time = ({ onChange, value }: TimeProps) => {
+export const Time = ({ disabledTime, onChange, value }: TimeProps) => {
   const [hour, setHour] = React.useState<`${number}`>(
     (value?.split(':')[0] as `${number}`) ?? ''
   )
@@ -23,6 +23,7 @@ export const Time = ({ onChange, value }: TimeProps) => {
         return (
           <Picker.Item
             active={hour === hr}
+            disabled={disabledTime?.(`${hr}:${60 - minuteStep}`)}
             key={hr}
             onClick={() => setHour(hr)}
           >
@@ -41,6 +42,7 @@ export const Time = ({ onChange, value }: TimeProps) => {
           return (
             <Picker.Item
               active={minute === min}
+              disabled={disabledTime?.(`${hour}:${min}`)}
               key={min}
               onClick={() => setMinute(min)}
             >

@@ -4,6 +4,7 @@ export type MiniCalendarProps = {
   controls?: boolean
   date?: DateType
   dayClick?: (day: DateType) => void
+  disabledDates?: (date: moment.Moment) => boolean
   monthClick?: (date: DateType) => void
   onChange?: (date: moment.Moment) => void
   selectedDate?: DateType

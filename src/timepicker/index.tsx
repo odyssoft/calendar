@@ -35,7 +35,13 @@ export const TimePicker = ({
   return (
     <>
       <Popover
-        content={<Time onChange={handleChange} value={value} />}
+        content={
+          <Time
+            disabledTime={disabledTime}
+            onChange={handleChange}
+            value={value}
+          />
+        }
         open={open}
         onClick={handleClick}
         onClose={handleClose}

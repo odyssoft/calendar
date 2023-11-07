@@ -4,5 +4,6 @@ import { DateType } from '../types'
 
 export interface DatePickerProps extends Omit<TextFieldProps, 'onChange'> {
   defaultValue?: DateType
-  onChange?: (date?: DateType) => void
+  disabledDates?: (date: moment.Moment) => boolean
+  onChange?: (date: DateType) => void
 }

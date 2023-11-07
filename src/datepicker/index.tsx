@@ -9,6 +9,7 @@ import { DatePickerProps } from './types'
 
 export const DatePicker = ({
   defaultValue,
+  disabledDates,
   onChange,
   ...rest
 }: DatePickerProps) => {
@@ -32,7 +33,12 @@ export const DatePicker = ({
   return (
     <Popover
       content={
-        <MiniCalendar dayClick={handleChange} controls selectedDate={value} />
+        <MiniCalendar
+          dayClick={handleChange}
+          controls
+          disabledDates={disabledDates}
+          selectedDate={value}
+        />
       }
       open={open}
       onClick={handleClick}
