@@ -7,6 +7,7 @@ export type CalendarContext = {
   excluded: string[]
   month: CalendarDate[][]
   next: () => void
+  onEventChange?: (event: CalendarEvent) => void
   previous: () => void
   selectDay: (date: DateType) => void
   selectEvent: (event?: ParsedEvent) => void
@@ -41,6 +42,7 @@ export type CalendarEvent = {
 
 export type CalendarProps = {
   data: CalendarEvent[]
+  onEventChange?: (event: CalendarEvent) => void
 }
 
 export type CalendarProviderProps = React.PropsWithChildren<CalendarProps>
@@ -80,6 +82,11 @@ export interface FlexProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export type Format = {
   [key in CalendarView]: string
+}
+
+export type GetDateTime = (datetime?: DateTimeType) => {
+  date?: DateType
+  time?: TimeType
 }
 
 export type GetEvents = (events: CalendarEvent[]) => EventsType

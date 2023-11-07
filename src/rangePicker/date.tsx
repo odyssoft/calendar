@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { DatePicker } from '../datepicker'
-import { Row } from '../styles'
 import { DateType } from '../types'
 import { DateRangeProps } from './types'
 
@@ -37,7 +36,7 @@ export const DateRangePicker = ({
   }, [defaultValue])
 
   return (
-    <Row style={{ gap: '.5rem' }}>
+    <>
       <DatePicker
         defaultValue={start}
         label={labels?.start ?? 'Start Date'}
@@ -57,6 +56,6 @@ export const DateRangePicker = ({
         {...datePickerProps}
         {...endProps}
       />
-    </Row>
+    </>
   )
 }

@@ -35,7 +35,11 @@ export const Context = React.createContext<CalendarContext>({
   year: [],
 })
 
-export const CalendarProvider = ({ children, data }: CalendarProviderProps) => {
+export const CalendarProvider = ({
+  children,
+  data,
+  onEventChange,
+}: CalendarProviderProps) => {
   const [date, setDate] = React.useState<moment.Moment>(now)
   const [excluded, setExcluded] = React.useState<string[]>([])
   const [selectedEvent, selectEvent] = React.useState<ParsedEvent>()
@@ -95,6 +99,7 @@ export const CalendarProvider = ({ children, data }: CalendarProviderProps) => {
           excluded,
           month,
           next,
+          onEventChange,
           previous,
           selectDay,
           selectEvent,

@@ -34,6 +34,8 @@ export const Base = Object.assign(
       outlineWidth: 0,
     })),
 
+    Footer: styled(Row)(({ theme }) => ({ padding: theme.space.md })),
+
     Header: styled(Row)(({ theme }) => ({
       borderBottom: `1px solid ${theme.colors.border}`,
     })),

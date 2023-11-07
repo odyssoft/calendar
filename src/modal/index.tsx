@@ -6,6 +6,7 @@ import { Close } from '@mui/icons-material'
 export const Modal = ({
   children,
   closeButton,
+  footer,
   title,
   ...rest
 }: ModalProps) => (
@@ -27,6 +28,7 @@ export const Modal = ({
         </Base.Header>
       )}
       <Base.Body>{children}</Base.Body>
+      {footer && <Base.Footer>{footer}</Base.Footer>}
     </Base.Content>
   </Base>
 )

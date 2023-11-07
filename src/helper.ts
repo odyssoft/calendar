@@ -7,9 +7,11 @@ import {
   DateType,
   EventsType,
   Format,
+  GetDateTime,
   GetEvents,
   GetMonthEvents,
   GetWeek,
+  TimeType,
 } from './types'
 
 export const format: Format = {
@@ -27,8 +29,13 @@ export const getClipPath = (start: boolean, end: boolean) => {
   return 'polygon(0 50%,10px 0,calc(100% - 10px) 0,100% 50%,calc(100% - 10px) 100%,10px 100%)'
 }
 
+export const getDateTime: GetDateTime = (datetime) => {
+  const [date, time] = datetime?.split(' ') as [DateType, TimeType]
+  return { date, time }
+}
+
 export const getEvents: GetEvents = (event) => {
-  const events: EventsType = {}
+  const events: any = {}
   event
     .sort((a, b) => a.start.localeCompare(b.start))
     .forEach(({ end: e, start: s, allDay, ...evt }) => {
@@ -156,3 +163,27 @@ export const getYear = (date: moment.Moment): moment.Moment[][] =>
   [...Array(3)]
     .map((_) => [...Array(4)])
     .map((row, i) => row.map((_, j) => date.clone().month(i * 4 + j)))
+
+export function objectEquals(x: any, y: any) {
+  if (x === y) return true
+
+  if (!(x instanceof Object) || !(y instanceof Object)) return false
+
+  if (x.constructor !== y.constructor) return false
+
+  for (var p in x) {
+    if (!x.hasOwnProperty(p)) continue
+
+    if (!y.hasOwnProperty(p)) return false
+
+    if (x[p] === y[p]) continue
+
+    if (typeof x[p] !== 'object') return false
+
+    if (!objectEquals(x[p], y[p])) return false
+  }
+
+  for (p in y) if (y.hasOwnProperty(p) && !x.hasOwnProperty(p)) return false
+
+  return true
+}
