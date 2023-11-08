@@ -4,6 +4,7 @@ import { MiniCalendar } from '../mini'
 import { Sidebar } from './styles'
 import { FormControl, FormGroup, FormLabel } from '@mui/material'
 import { SwitchBaseProps } from '@mui/material/internal/SwitchBase'
+import { DateType } from '../types'
 
 export const CalendarSidebar = ({ children }: React.PropsWithChildren) => {
   const {
@@ -28,7 +29,7 @@ export const CalendarSidebar = ({ children }: React.PropsWithChildren) => {
       <Sidebar.Nav visible={!!sidebar}>
         <MiniCalendar
           controls
-          date={date.format('DD-MM-YYYY')}
+          date={date.format('DD-MM-YYYY') as DateType}
           dayClick={selectDay}
           onChange={setDate}
         />
