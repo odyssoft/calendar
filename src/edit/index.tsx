@@ -12,25 +12,28 @@ import React from 'react'
 
 import { useCalendar } from '../context'
 import { DatePicker } from '../datepicker'
+import { objectEquals } from '../helper'
 import { Modal } from '../modal'
-import { Flex, Row } from '../styles'
-import { DateTimeType, DateType, ParsedEvent, TimeType } from '../types'
 import { DateRangePicker, TimeRangePicker } from '../rangePicker'
-import { getDateTime, objectEquals } from '../helper'
+import { Flex, Row } from '../styles'
+import { CalendarEvent, DateType, TimeType } from '../types'
 
 export const EditModal = () => {
   const { calendars, onEventChange, selectEvent, selectedEvent } = useCalendar()
   const [allDay, setAllDay] = React.useState(!!selectedEvent!.allDay)
   const [calendar, setCalendar] = React.useState(selectedEvent!.calendar.id)
-  const [endDate, setEndDate] = React.useState<DateType>(
-    selectedEvent!.end.split(' ')[0] as DateType
-  )
-  const [endTime, setEndTime] = React.useState<TimeType>(
-    selectedEvent!.end.split(' ')[1] as TimeType
-  )
+  // const [description, setDescription] = React.useState(
+  //   selectedEvent!.description
+  // )
   const [startDate, setStartDate] = React.useState<DateType>(
     selectedEvent!.start.split(' ')[0] as DateType
   )
+  const end = selectedEvent!.end.split(' ')
+  const [endDate, setEndDate] = React.useState<DateType | undefined>(
+    end[0] !== startDate ? (end[0] as DateType) : undefined
+  )
+  const [endTime, setEndTime] = React.useState<TimeType>(end[1] as TimeType)
+
   const [startTime, setStartTime] = React.useState<TimeType>(
     selectedEvent!.start.split(' ')[1] as TimeType
   )
@@ -41,30 +44,48 @@ export const EditModal = () => {
       id: selectedEvent!.id,
       allDay,
       calendar: calendars.find(({ id }) => id === calendar)!,
-      end: allDay ? endDate : `${endDate} ${endTime}`,
+      description: undefined,
+      end: allDay ? endDate : `${startDate} ${endTime}`,
       start: allDay ? startDate : `${startDate} ${startTime}`,
       title,
     }),
     [allDay, calendar, endDate, endTime, startDate, startTime, title]
   )
 
-  const { end, start } = React.useMemo(
-    () => ({
-      end: getDateTime(selectedEvent?.end as DateTimeType),
-      start: getDateTime(selectedEvent?.start as DateTimeType),
-    }),
-    [selectedEvent]
-  )
+  const valid = React.useMemo(() => {
+    if (!updated.title || updated.title.trim().length === 0) {
+      console.log({ title: updated.title })
+      return false
+    }
+    if (!updated.calendar) {
+      console.log({ calendar: updated.calendar })
+      return false
+    }
+    if (!updated.start || updated.start.trim().length === 0) {
+      console.log({ start: updated.start })
+      return false
+    }
+    if (!updated.end || updated.end.trim().length === 0) {
+      console.log({ end: updated.end })
+      return false
+    }
+    if (updated.end <= updated.start) {
+      console.log({ end: updated.end, start: updated.start })
+      return false
+    }
+    return !objectEquals(updated, selectedEvent)
+  }, [updated, selectedEvent])
 
   const handleClose = () => selectEvent(undefined)
 
   const handleSave = () => {
-    !objectEquals(updated, {
-      ...selectedEvent,
-      allDay: !!selectedEvent?.allDay,
-    }) && onEventChange?.(updated as ParsedEvent)
+    valid && onEventChange?.(updated as CalendarEvent)
     handleClose()
   }
+
+  React.useEffect(() => {
+    console.log({ selectedEvent, updated, valid })
+  }, [selectedEvent, updated, valid])
 
   return (
     <Modal
@@ -79,7 +100,13 @@ export const EditModal = () => {
           >
             Cancel
           </Button>
-          <Button size='small' variant='contained' onClick={handleSave}>
+          <Button
+            disabled={!valid}
+            size='small'
+            variant='contained'
+            onClick={handleSave}
+            sx={{ color: !valid ? 'grey !important' : undefined }}
+          >
             Save
           </Button>
         </Row>
@@ -91,8 +118,8 @@ export const EditModal = () => {
       <Flex direction='column' style={{ gap: '.5rem' }}>
         <FormControl fullWidth>
           <TextField
-            defaultValue={selectedEvent?.title}
-            label='Name'
+            defaultValue={title}
+            label='Event Name'
             name='name'
             onChange={({ target: { value } }) => setTitle(value)}
             placeholder='Enter event name.'
@@ -102,7 +129,19 @@ export const EditModal = () => {
             variant='standard'
           />
         </FormControl>
-        <FormControl fullWidth>
+        {/* <FormControl fullWidth>
+          <TextField
+            defaultValue={description}
+            label='Event Description'
+            name='description'
+            onChange={({ target: { value } }) => setDescription(value)}
+            placeholder='Enter event description.'
+            // InputProps={{ startAdornment: <AbcRounded /> }}
+            type='text'
+            variant='standard'
+          />
+        </FormControl> */}
+        <FormControl fullWidth required>
           <InputLabel id='select-calendar-label' variant='standard'>
             Calendar
           </InputLabel>
@@ -112,6 +151,7 @@ export const EditModal = () => {
             value={calendar}
             label='Calendar'
             onChange={({ target: { value } }) => setCalendar(value)}
+            sx={{ '& svg': { fill: 'white' } }}
             variant='standard'
           >
             {calendars.map(({ color, id, name }) => (
@@ -129,29 +169,34 @@ export const EditModal = () => {
         <Row style={{ gap: '.5rem' }}>
           {allDay ? (
             <DateRangePicker
-              defaultValue={{ end: end?.date, start: start?.date }}
+              defaultValue={{
+                end: endDate === startDate ? undefined : endDate,
+                start: startDate,
+              }}
               onChange={(value) => {
                 value?.end && setEndDate(value.end)
                 value?.start && setStartDate(value.start)
               }}
+              datePickerProps={{ required: true }}
             />
           ) : (
             <>
               <DatePicker
-                defaultValue={start?.date}
+                defaultValue={startDate}
                 fullWidth={!allDay}
                 label={allDay ? 'Start' : 'Date'}
                 name='start'
                 onChange={setStartDate}
+                required
                 variant='standard'
               />
               <TimeRangePicker
-                defaultValue={{ end: end?.time, start: start?.time }}
+                defaultValue={{ end: endTime, start: startTime }}
                 onChange={(value) => {
                   value?.end && setEndTime(value.end)
                   value?.start && setStartTime(value.start)
                 }}
-                timePickerProps={{ style: { maxWidth: 109 } }}
+                timePickerProps={{ required: true, style: { maxWidth: 109 } }}
               />
             </>
           )}

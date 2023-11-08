@@ -10,10 +10,10 @@ export type CalendarContext = {
   onEventChange?: (event: CalendarEvent) => void
   previous: () => void
   selectDay: (date: DateType) => void
-  selectEvent: (event?: ParsedEvent) => void
+  selectEvent: (event?: CalendarEvent) => void
   selectMonth: (date: DateType) => void
   selectWeek: (week: string, year: string) => void
-  selectedEvent?: ParsedEvent
+  selectedEvent?: CalendarEvent
   setDate: (date: moment.Moment) => void
   setExcluded: (excluded: string[]) => void
   setView: (view: CalendarView) => void

@@ -5,10 +5,11 @@ import { CalendarHeader } from './header'
 import { CalendarSidebar } from './sidebar'
 import { CalendarBody } from './body'
 import { CalendarProps } from './types'
+import { EditModal } from './edit'
 
-export const Calendar = ({ data }: CalendarProps) => {
+export const Calendar = (props: CalendarProps) => {
   return (
-    <CalendarProvider data={data}>
+    <CalendarProvider {...props}>
       <CalendarContainer>
         <CalendarHeader>
           <CalendarSidebar>

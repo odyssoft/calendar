@@ -109,6 +109,7 @@ export const MonthEvents = Object.assign(
       marginTop: '.25rem',
       paddingLeft: '1rem',
       position: 'relative',
+      cursor: 'pointer',
       '&::before': {
         background,
         borderRadius: '50%',
@@ -121,6 +122,7 @@ export const MonthEvents = Object.assign(
         transform: 'translateY(-50%)',
         width: 10,
       },
+      '&:hover': { opacity: 0.75 },
     })),
 
     Inner: styled(Flex)({ flex: 1, flexDirection: 'column' }),

@@ -29,11 +29,6 @@ export const getClipPath = (start: boolean, end: boolean) => {
   return 'polygon(0 50%,10px 0,calc(100% - 10px) 0,100% 50%,calc(100% - 10px) 100%,10px 100%)'
 }
 
-export const getDateTime: GetDateTime = (datetime) => {
-  const [date, time] = datetime?.split(' ') as [DateType, TimeType]
-  return { date, time }
-}
-
 export const getEvents: GetEvents = (event) => {
   const events: any = {}
   event

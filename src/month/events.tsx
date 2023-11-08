@@ -3,7 +3,7 @@ import React from 'react'
 
 import { useCalendar } from '../context'
 import { Text } from '../styles'
-import { CalendarDate, ParsedEvent } from '../types'
+import { CalendarDate, CalendarEvent, ParsedEvent } from '../types'
 
 import { More } from './more'
 import { MonthEvents } from './styles'
@@ -14,6 +14,7 @@ export const Events = ({
   isHourly,
 }: CalendarDate & { isHourly?: boolean }) => {
   const { selectEvent } = useCalendar()
+  console.log({ selectEvent })
   const max = React.useMemo(
     () => (a.length + h.length > 6 ? 5 : a.length + h.length),
     [a, h]
@@ -54,7 +55,15 @@ export const Events = ({
               span={event.span}
               key={event.id}
               onClick={() =>
-                selectEvent({ ...event, allDay: true } as ParsedEvent)
+                selectEvent({
+                  calendar: event.calendar,
+                  end: event.end,
+                  id: event.id,
+                  start: event.start,
+                  title: event.title,
+                  description: event.description,
+                  allDay: true,
+                } as CalendarEvent)
               }
             >
               <Text>{event.title}</Text>
@@ -66,7 +75,15 @@ export const Events = ({
             background={event.calendar.color}
             key={event.id}
             onClick={() =>
-              selectEvent({ ...event, allDay: false } as ParsedEvent)
+              selectEvent({
+                calendar: event.calendar,
+                end: event.end,
+                id: event.id,
+                start: event.start,
+                title: event.title,
+                description: event.description,
+                allDay: false,
+              } as CalendarEvent)
             }
           >
             <Text>{event.title}</Text>

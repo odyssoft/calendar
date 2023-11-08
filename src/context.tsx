@@ -2,6 +2,7 @@ import React from 'react'
 import { ThemeProvider } from './theme'
 import {
   CalendarContext,
+  CalendarEvent,
   CalendarProviderProps,
   CalendarType,
   CalendarView,
@@ -10,6 +11,7 @@ import {
 } from './types'
 import moment from 'moment'
 import { format, getMonthEvents, getWeek, getYear } from './helper'
+import { EditModal } from './edit'
 
 const empty = (...params: any): any => {}
 const now = moment()
@@ -42,7 +44,7 @@ export const CalendarProvider = ({
 }: CalendarProviderProps) => {
   const [date, setDate] = React.useState<moment.Moment>(now)
   const [excluded, setExcluded] = React.useState<string[]>([])
-  const [selectedEvent, selectEvent] = React.useState<ParsedEvent>()
+  const [selectedEvent, selectEvent] = React.useState<CalendarEvent>()
   const [sidebar, setSidebar] = React.useState<boolean>()
   const [view, setView] = React.useState<CalendarView>('month')
 
@@ -118,6 +120,7 @@ export const CalendarProvider = ({
         }}
       >
         {children}
+        {!!selectedEvent && <EditModal />}
       </Context.Provider>
     </ThemeProvider>
   )

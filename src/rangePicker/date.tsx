@@ -24,7 +24,7 @@ export const DateRangePicker = ({
   const handleStartChange = (date: DateType) => {
     setStart(date)
     if (end) {
-      date > end ? setEnd(undefined) : onChange?.({ end, start: date })
+      date >= end ? setEnd(undefined) : onChange?.({ end, start: date })
     }
   }
 
@@ -48,7 +48,7 @@ export const DateRangePicker = ({
       />
       <DatePicker
         defaultValue={end}
-        disabledDates={(day) => day.format('DD-MM-YYYY') < (start ?? '0')}
+        disabledDates={(day) => day.format('DD-MM-YYYY') <= (start ?? '0')}
         label={labels?.end ?? 'End Date'}
         name={`${name}-end`}
         onChange={handleEndChange}
