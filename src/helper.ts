@@ -5,14 +5,13 @@ import {
   CalendarDate,
   DateKey,
   DateType,
-  EventsType,
   Format,
-  GetDateTime,
   GetEvents,
   GetMonthEvents,
   GetWeek,
-  TimeType,
 } from './types'
+
+export const empty = (...params: any): any => {}
 
 export const format: Format = {
   day: 'MMMM DD, YYYY',

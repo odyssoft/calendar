@@ -7,13 +7,11 @@ import {
   CalendarType,
   CalendarView,
   DateType,
-  ParsedEvent,
 } from './types'
 import moment from 'moment'
-import { format, getMonthEvents, getWeek, getYear } from './helper'
+import { empty, format, getMonthEvents, getWeek, getYear } from './helper'
 import { EditModal } from './edit'
 
-const empty = (...params: any): any => {}
 const now = moment()
 
 export const Context = React.createContext<CalendarContext>({
