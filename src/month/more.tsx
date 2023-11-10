@@ -2,7 +2,13 @@ import { Row, Text } from '../styles'
 import { MonthEvents, MoreDropdown } from './styles'
 import { MoreProps } from './types'
 
-export const More = ({ allDay, diff, hourly, isHourly }: MoreProps) => (
+export const More = ({
+  allDay,
+  diff,
+  editable,
+  hourly,
+  isHourly,
+}: MoreProps) => (
   <Row>
     <MoreDropdown
       items={[
@@ -10,6 +16,7 @@ export const More = ({ allDay, diff, hourly, isHourly }: MoreProps) => (
           children: (
             <MonthEvents.Daily
               background={calendar.color}
+              editable={editable}
               isEnd={isEnd}
               isHourly={isHourly}
               isStart={isStart}
@@ -22,7 +29,7 @@ export const More = ({ allDay, diff, hourly, isHourly }: MoreProps) => (
         })),
         ...hourly.map(({ calendar, id, title }) => ({
           children: (
-            <MonthEvents.Hourly background={calendar.color}>
+            <MonthEvents.Hourly background={calendar.color} editable={editable}>
               <Text>{title}</Text>
             </MonthEvents.Hourly>
           ),

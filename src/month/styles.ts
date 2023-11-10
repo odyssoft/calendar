@@ -79,16 +79,16 @@ export const MonthEvents = Object.assign(
   {
     Daily: styled(Flex)<{
       background: string
+      editable: boolean
       isEnd?: boolean
       isHourly?: boolean
       isStart?: boolean
       span: number
-    }>(({ background, isEnd, isHourly, isStart, span, theme }) => ({
+    }>(({ background, editable, isEnd, isHourly, isStart, span, theme }) => ({
       background: background,
       borderRadius: 4,
       boxShadow: theme.boxShadows.xs,
       clipPath: getClipPath(!!isStart, !!isEnd),
-      cursor: 'pointer',
       fontSize: theme.fontSizes.xs,
       lineHeight: 'normal',
       marginLeft: 4,
@@ -98,32 +98,39 @@ export const MonthEvents = Object.assign(
       paddingLeft: theme.space[5],
       width: getWidth(span, isHourly),
       zIndex: 1,
-      '&:hover': { opacity: 0.75 },
+      ...(editable && {
+        cursor: 'pointer',
+        '&:hover': { opacity: 0.75 },
+      }),
     })),
 
     Empty: styled(Row)({ width: '100%', height: 18 }),
-    Hourly: styled(Flex)<{ background: string }>(({ background, theme }) => ({
-      fontSize: theme.fontSizes.xs,
-      lineHeight: 'normal',
-      marginLeft: '.5rem',
-      marginTop: '.25rem',
-      paddingLeft: '1rem',
-      position: 'relative',
-      cursor: 'pointer',
-      '&::before': {
-        background,
-        borderRadius: '50%',
-        boxShadow: theme.boxShadows.xs,
-        content: '""',
-        height: 10,
-        left: 0,
-        position: 'absolute',
-        top: '50%',
-        transform: 'translateY(-50%)',
-        width: 10,
-      },
-      '&:hover': { opacity: 0.75 },
-    })),
+    Hourly: styled(Flex)<{ background: string; editable: boolean }>(
+      ({ background, editable, theme }) => ({
+        fontSize: theme.fontSizes.xs,
+        lineHeight: 'normal',
+        marginLeft: '.5rem',
+        marginTop: '.25rem',
+        paddingLeft: '1rem',
+        position: 'relative',
+        '&::before': {
+          background,
+          borderRadius: '50%',
+          boxShadow: theme.boxShadows.xs,
+          content: '""',
+          height: 10,
+          left: 0,
+          position: 'absolute',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          width: 10,
+        },
+        ...(editable && {
+          cursor: 'pointer',
+          '&:hover': { opacity: 0.75 },
+        }),
+      })
+    ),
 
     Inner: styled(Flex)({ flex: 1, flexDirection: 'column' }),
   }

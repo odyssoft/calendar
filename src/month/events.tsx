@@ -13,7 +13,7 @@ export const Events = ({
   events: { allDay: a, hourly: h },
   isHourly,
 }: CalendarDate & { isHourly?: boolean }) => {
-  const { selectEvent } = useCalendar()
+  const { editable, selectEvent } = useCalendar()
 
   const max = React.useMemo(
     () => (a.length + h.length > 6 ? 5 : a.length + h.length),
@@ -49,12 +49,14 @@ export const Events = ({
           ) : (
             <MonthEvents.Daily
               background={event.calendar.color}
+              editable={!!editable}
               isEnd={event.isEnd}
               isHourly={isHourly}
               isStart={event.isStart}
               span={event.span}
               key={event.id}
               onClick={() =>
+                editable &&
                 selectEvent({
                   calendar: event.calendar,
                   end: event.end,
@@ -73,8 +75,10 @@ export const Events = ({
         {hourly.map((event) => (
           <MonthEvents.Hourly
             background={event.calendar.color}
+            editable={!!editable}
             key={event.id}
             onClick={() =>
+              editable &&
               selectEvent({
                 calendar: event.calendar,
                 end: event.end,
@@ -99,6 +103,7 @@ export const Events = ({
               .isSameOrBefore(date),
           }))}
           diff={diff}
+          editable={!!editable}
           hourly={h}
         />
       )}

@@ -38,6 +38,7 @@ export const Context = React.createContext<CalendarContext>({
 export const CalendarProvider = ({
   children,
   data,
+  editable,
   onEventChange,
 }: CalendarProviderProps) => {
   const [date, setDate] = React.useState<moment.Moment>(now)
@@ -96,6 +97,7 @@ export const CalendarProvider = ({
         value={{
           calendars,
           date,
+          editable,
           excluded,
           month,
           next,
@@ -118,7 +120,7 @@ export const CalendarProvider = ({
         }}
       >
         {children}
-        {!!selectedEvent && <EditModal />}
+        {editable && !!selectedEvent && <EditModal />}
       </Context.Provider>
     </ThemeProvider>
   )

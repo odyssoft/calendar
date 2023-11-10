@@ -4,6 +4,7 @@ import React from 'react'
 export type CalendarContext = {
   calendars: CalendarType[]
   date: moment.Moment
+  editable?: boolean
   excluded: string[]
   month: CalendarDate[][]
   next: () => void
@@ -42,6 +43,7 @@ export type CalendarEvent = {
 
 export type CalendarProps = {
   data: CalendarEvent[]
+  editable?: boolean
   onEventChange?: (event: CalendarEvent) => void
 }
 
