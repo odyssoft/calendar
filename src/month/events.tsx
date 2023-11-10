@@ -14,7 +14,7 @@ export const Events = ({
   isHourly,
 }: CalendarDate & { isHourly?: boolean }) => {
   const { selectEvent } = useCalendar()
-  console.log({ selectEvent })
+
   const max = React.useMemo(
     () => (a.length + h.length > 6 ? 5 : a.length + h.length),
     [a, h]

@@ -8,7 +8,7 @@ export type DateRangeProps = {
   endProps?: DatePickerProps
   labels?: RangePickerLabel
   name?: string
-  onChange?: (value?: RangePickerValue<DateType>) => void
+  onChange?: (value: RangePickerValue<DateType>) => void
   startProps?: DatePickerProps
 }
 
@@ -19,7 +19,7 @@ type RangePickerLabel = {
 }
 
 export type RangePickerValue<T> = {
-  [key in RangePickerKeys]?: T
+  [key in RangePickerKeys]: T
 }
 
 export type TimeRangeProps = {
@@ -28,6 +28,6 @@ export type TimeRangeProps = {
   endProps?: TimePickerProps
   labels?: RangePickerLabel
   name?: string
-  onChange?: (value?: RangePickerValue<TimeType>) => void
+  onChange?: (value: RangePickerValue<TimeType>) => void
   startProps?: TimePickerProps
 }
