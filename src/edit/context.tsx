@@ -17,26 +17,11 @@ export const EditProvider = ({ children }: React.PropsWithChildren) => {
   const [event, setEvent] = React.useState<CalendarEvent>()
 
   const disabled = React.useMemo(() => {
-    if (!event?.title || event?.title.trim().length === 0) {
-      console.log({ title: event?.title })
-      return false
-    }
-    if (!event?.calendar) {
-      console.log({ calendar: event?.calendar })
-      return false
-    }
-    if (!event?.start || event?.start.trim().length === 0) {
-      console.log({ start: event?.start })
-      return false
-    }
-    if (!event?.end || event?.end.trim().length === 0) {
-      console.log({ end: event?.end })
-      return false
-    }
-    if (event?.end <= event?.start) {
-      console.log({ end: event?.end, start: event?.start })
-      return false
-    }
+    if (!event?.title || event?.title.trim().length === 0) return false
+    if (!event?.calendar) return false
+    if (!event?.start || event?.start.trim().length === 0) return false
+    if (!event?.end || event?.end.trim().length === 0) return false
+    if (event?.end <= event?.start) return false
     return !objectEquals(event, selectedEvent)
   }, [event, selectedEvent])
 
@@ -50,10 +35,6 @@ export const EditProvider = ({ children }: React.PropsWithChildren) => {
   React.useEffect(() => {
     selectedEvent && setEvent(selectedEvent)
   }, [selectedEvent])
-
-  React.useEffect(() => {
-    console.log({ event })
-  }, [event])
 
   return (
     <Context.Provider
