@@ -1,11 +1,11 @@
 import React from 'react'
 
+import { DatePicker } from '../datepicker'
 import { DateRangePicker, TimeRangePicker } from '../rangePicker'
 import { RangePickerValue } from '../rangePicker/types'
 import { Row } from '../styles'
 import { CalendarEvent, DateType, TimeType } from '../types'
 import { useEdit } from './context'
-import { DatePicker } from '../datepicker'
 
 export const Dates = () => {
   const { event, setEvent } = useEdit()

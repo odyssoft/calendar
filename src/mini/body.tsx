@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { Row } from '../styles'
 import { useMiniCalendar } from './context'
 import { MiniDay } from './day'

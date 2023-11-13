@@ -1,7 +1,9 @@
+import { Close } from '@mui/icons-material'
 import { IconButton } from '@mui/material'
+import React from 'react'
+
 import { Base } from './styles'
 import { ModalProps } from './types'
-import { Close } from '@mui/icons-material'
 
 export const Modal = ({
   children,

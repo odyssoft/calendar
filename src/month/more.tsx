@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { Row, Text } from '../styles'
 import { MonthEvents, MoreDropdown } from './styles'
 import { MoreProps } from './types'

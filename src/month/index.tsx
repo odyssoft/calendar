@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { useCalendar } from '../context'
 import { Row } from '../styles'
 import { Day } from './day'

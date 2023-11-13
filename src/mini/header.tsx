@@ -4,6 +4,8 @@ import {
   KeyboardDoubleArrowLeftRounded,
   KeyboardDoubleArrowRightRounded,
 } from '@mui/icons-material'
+import React from 'react'
+
 import { Column } from '../styles'
 import { DateType } from '../types'
 import { useMiniCalendar } from './context'

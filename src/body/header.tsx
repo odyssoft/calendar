@@ -1,9 +1,10 @@
 import React from 'react'
+
 import { DAYS } from '../constants'
 import { useCalendar } from '../context'
 import { Row } from '../styles'
-import { Header } from './styles'
 import { Day } from './day'
+import { Header } from './styles'
 
 export const BodyHeader = () => {
   const { view, week } = useCalendar()

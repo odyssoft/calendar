@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { useCalendar } from '../context'
 import { CalendarDate } from '../types'
 import { Month } from './styles'

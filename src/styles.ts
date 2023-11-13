@@ -19,6 +19,8 @@ export const CalendarContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   height: '100%',
+  maxHeight: '100vh',
+  maxWidth: '100vw',
   overflow: 'hidden',
   width: '100%',
 }))

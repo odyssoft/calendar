@@ -1,10 +1,11 @@
-import { Checkbox, FormControlLabel, TextField } from '@mui/material'
+import { TextField } from '@mui/material'
+import React from 'react'
 
 import { Flex } from '../styles'
 import { CalendarEvent } from '../types'
+import { AlldayCheckbox } from './alldayCheckbox'
 import { CalendarSelect } from './calendarSelect'
 import { useEdit } from './context'
-import { AlldayCheckbox } from './alldayCheckbox'
 import { Dates } from './dates'
 
 export const Form = () => {

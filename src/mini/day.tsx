@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { DateType } from '../types'
 import { useMiniCalendar } from './context'
 import { Day } from './styles'

@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { DAYS } from '../constants'
 import { Column, Row } from '../styles'
 import { useMiniCalendar } from './context'

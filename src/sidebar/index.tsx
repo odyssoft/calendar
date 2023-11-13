@@ -1,10 +1,11 @@
-import React from 'react'
-import { useCalendar } from '../context'
-import { MiniCalendar } from '../mini'
-import { Sidebar } from './styles'
 import { FormControl, FormGroup, FormLabel } from '@mui/material'
 import { SwitchBaseProps } from '@mui/material/internal/SwitchBase'
+import React from 'react'
+
+import { useCalendar } from '../context'
+import { MiniCalendar } from '../mini'
 import { DateType } from '../types'
+import { Sidebar } from './styles'
 
 export const CalendarSidebar = ({ children }: React.PropsWithChildren) => {
   const {

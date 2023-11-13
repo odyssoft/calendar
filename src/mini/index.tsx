@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { Body } from './body'
 import { MiniProvider } from './context'
 import { Days } from './days'

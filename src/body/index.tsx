@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { useCalendar } from '../context'
 import { CalendarMonth } from '../month'
 import { CalendarWeek } from '../week'

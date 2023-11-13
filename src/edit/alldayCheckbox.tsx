@@ -1,5 +1,6 @@
 import { Checkbox, FormControlLabel } from '@mui/material'
 import { SwitchBaseProps } from '@mui/material/internal/SwitchBase'
+import React from 'react'
 
 import { useEdit } from './context'
 import { CalendarEvent } from '../types'

@@ -1,4 +1,5 @@
 import { Button } from '@mui/material'
+import React from 'react'
 
 import { Modal as Base } from '../modal'
 import { Row } from '../styles'

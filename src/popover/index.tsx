@@ -1,7 +1,8 @@
+import { ModalProps } from '@mui/material'
 import React from 'react'
+
 import { Base } from './styles'
 import { PopoverProps } from './types'
-import { ModalProps } from '@mui/material'
 
 export const Popover = ({
   children,

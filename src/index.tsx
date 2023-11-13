@@ -1,24 +1,22 @@
 import React from 'react'
+
+import { CalendarBody } from './body'
 import { CalendarProvider } from './context'
-import { CalendarContainer } from './styles'
 import { CalendarHeader } from './header'
 import { CalendarSidebar } from './sidebar'
-import { CalendarBody } from './body'
+import { CalendarContainer } from './styles'
 import { CalendarProps } from './types'
-import { EditModal } from './edit'
 
-export const Calendar = (props: CalendarProps) => {
-  return (
-    <CalendarProvider {...props}>
-      <CalendarContainer>
-        <CalendarHeader>
-          <CalendarSidebar>
-            <CalendarBody />
-          </CalendarSidebar>
-        </CalendarHeader>
-      </CalendarContainer>
-    </CalendarProvider>
-  )
-}
+export const Calendar = (props: CalendarProps) => (
+  <CalendarProvider {...props}>
+    <CalendarContainer>
+      <CalendarHeader>
+        <CalendarSidebar>
+          <CalendarBody />
+        </CalendarSidebar>
+      </CalendarHeader>
+    </CalendarContainer>
+  </CalendarProvider>
+)
 
 export default Calendar

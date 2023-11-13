@@ -1,7 +1,8 @@
 import React from 'react'
-import { MiniProviderProps, MiniContext } from './types'
 import moment from 'moment'
+
 import { getMonth } from '../helper'
+import { MiniProviderProps, MiniContext } from './types'
 
 const Context = React.createContext<MiniContext>({
   date: moment(),

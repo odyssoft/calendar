@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { useMiniCalendar } from './context'
 import { Week } from './styles'
 import { MiniWeekProps } from './types'
