@@ -42,7 +42,7 @@ export type CalendarEvent = {
 )
 
 export type CalendarProps = {
-  data: CalendarEvent[]
+  data?: CalendarEvent[]
   editable?: boolean
   onEventChange?: (event: CalendarEvent) => void
 }

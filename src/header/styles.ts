@@ -21,7 +21,7 @@ export const Header = Object.assign(
         },
     })),
 
-    Content: styled(Flex)({ flex: 1, maxHeight: '100%' }),
+    Content: styled(Flex)({ flex: 1, maxHeight: 'calc(100% - 58px)' }),
 
     IconButton: styled(IconButton)(({ theme }) => ({
       borderRadius: 12,

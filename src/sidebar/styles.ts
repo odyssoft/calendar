@@ -20,7 +20,7 @@ export const Sidebar = Object.assign(
     Content: styled(Flex)({
       flex: 1,
       maxWidth: '100%',
-      maxHeight: 'calc(100% - 3.65rem)',
+      maxHeight: '100%',
     }),
 
     ControlLabel: styled(FormControlLabel)<{ background?: string }>(
