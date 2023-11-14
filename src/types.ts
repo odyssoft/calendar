@@ -43,8 +43,12 @@ export type CalendarEvent = {
 
 export type CalendarProps = {
   data?: CalendarEvent[]
+  defaultView?: CalendarView
   editable?: boolean
+  navigation?: boolean
   onEventChange?: (event: CalendarEvent) => void
+  sidebar?: boolean
+  views?: CalendarView[]
 }
 
 export type CalendarProviderProps = React.PropsWithChildren<CalendarProps>
