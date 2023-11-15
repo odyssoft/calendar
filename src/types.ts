@@ -7,6 +7,7 @@ export type CalendarContext = {
   editable?: boolean
   excluded: string[]
   month: CalendarDate[][]
+  navigation: boolean
   next: () => void
   onEventChange?: (event: CalendarEvent) => void
   previous: () => void
@@ -22,6 +23,7 @@ export type CalendarContext = {
   title: string
   toggleSidebar: () => void
   view: CalendarView
+  views: CalendarView[]
   week: CalendarDate[][]
   year: moment.Moment[][]
 }

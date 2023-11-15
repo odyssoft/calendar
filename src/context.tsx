@@ -1,4 +1,9 @@
 import React from 'react'
+import moment from 'moment'
+
+import { VIEWS } from './constants'
+import { EditModal } from './edit'
+import { empty, format, getMonthEvents, getWeek, getYear } from './helper'
 import { ThemeProvider } from './theme'
 import {
   CalendarContext,
@@ -8,9 +13,6 @@ import {
   CalendarView,
   DateType,
 } from './types'
-import moment from 'moment'
-import { empty, format, getMonthEvents, getWeek, getYear } from './helper'
-import { EditModal } from './edit'
 
 const now = moment()
 
@@ -19,6 +21,7 @@ export const Context = React.createContext<CalendarContext>({
   date: now,
   excluded: [],
   month: [],
+  navigation: false,
   next: empty,
   previous: empty,
   selectDay: empty,
@@ -31,6 +34,7 @@ export const Context = React.createContext<CalendarContext>({
   title: '',
   toggleSidebar: empty,
   view: 'month',
+  views: VIEWS,
   week: [],
   year: [],
 })
@@ -38,19 +42,23 @@ export const Context = React.createContext<CalendarContext>({
 export const CalendarProvider = ({
   children,
   data,
+  defaultView = 'month',
   editable,
+  navigation = true,
   onEventChange,
+  sidebar: sb = false,
+  views = VIEWS,
 }: CalendarProviderProps) => {
   const [date, setDate] = React.useState<moment.Moment>(now)
   const [excluded, setExcluded] = React.useState<string[]>([])
   const [selectedEvent, selectEvent] = React.useState<CalendarEvent>()
-  const [sidebar, setSidebar] = React.useState<boolean>()
-  const [view, setView] = React.useState<CalendarView>('month')
+  const [sidebar, setSidebar] = React.useState<boolean>(sb)
+  const [view, setView] = React.useState<CalendarView>(defaultView)
 
   const calendars = React.useMemo(
     () =>
       Object.values(
-        data
+        (data ?? [])
           .map(({ calendar }) => calendar)
           .reduce((acc, cur) => ({ ...acc, [cur.id]: cur }), {})
       ) as CalendarType[],
@@ -59,7 +67,8 @@ export const CalendarProvider = ({
   const month = React.useMemo(
     () =>
       getMonthEvents({
-        data: data.filter(({ calendar }) => !excluded.includes(calendar.id)),
+        data:
+          data?.filter(({ calendar }) => !excluded.includes(calendar.id)) ?? [],
         date,
       }),
     [date, data, excluded]
@@ -91,6 +100,8 @@ export const CalendarProvider = ({
       localStorage.setItem('calendarOpen', sidebar.toString())
   }, [sidebar])
 
+  React.useEffect(() => setView(defaultView), [defaultView])
+
   return (
     <ThemeProvider>
       <Context.Provider
@@ -100,6 +111,7 @@ export const CalendarProvider = ({
           editable,
           excluded,
           month,
+          navigation,
           next,
           onEventChange,
           previous,
@@ -115,6 +127,7 @@ export const CalendarProvider = ({
           title,
           toggleSidebar: () => setSidebar(!sidebar),
           view,
+          views,
           week,
           year,
         }}
