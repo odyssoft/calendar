@@ -35,7 +35,9 @@ export const Sidebar = Object.assign(
       })
     ),
 
-    Nav: styled(Flex)<{ visible: boolean }>(({ theme, visible }) => ({
+    Nav: styled(({ visible, ...rest }: any) => <Flex {...rest} />)<{
+      visible: boolean
+    }>(({ theme, visible }) => ({
       backdropFilter: theme.filters.sm,
       borderRight: visible ? `1px solid ${theme.colors.border}` : 'unset',
       flexDirection: 'column',

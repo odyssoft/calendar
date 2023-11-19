@@ -6,27 +6,27 @@ import { Dropdown } from '../dropdown'
 export const Month = Object.assign(
   styled(Flex)({ flex: 1, flexDirection: 'column', width: '100%' }),
   {
-    Button: styled(IconButton)<{ isDay?: boolean; isMonth?: boolean }>(
-      ({ isDay, isMonth, theme }) => ({
-        ...(isDay && {
-          background: '#F31260',
-          '&:hover': { background: '#F31260' },
-        }),
-        border: 'none !important',
-        borderRadius: '4px',
-        color: theme.palette.text.primary,
-        fontSize: '.85rem',
-        fontWeight: theme.fontWeights.semibold,
-        height: 25,
-        marginLeft: '.1em',
-        marginRight: '.1em',
-        maxWidth: 25,
-        minWidth: 25,
-        padding: '0 !important',
-        opacity: isMonth ? 1 : 0.5,
-        width: 25,
-      })
-    ),
+    Button: styled(({ isDay, isMonth, ...rest }: any) => (
+      <IconButton {...rest} />
+    ))<{ isDay?: boolean; isMonth?: boolean }>(({ isDay, isMonth, theme }) => ({
+      ...(isDay && {
+        background: '#F31260',
+        '&:hover': { background: '#F31260' },
+      }),
+      border: 'none !important',
+      borderRadius: '4px',
+      color: theme.palette.text.primary,
+      fontSize: '.85rem',
+      fontWeight: theme.fontWeights.semibold,
+      height: 25,
+      marginLeft: '.1em',
+      marginRight: '.1em',
+      maxWidth: 25,
+      minWidth: 25,
+      padding: '0 !important',
+      opacity: isMonth ? 1 : 0.5,
+      width: 25,
+    })),
 
     Column: styled(Column)(({ theme }) => ({
       justifyContent: 'flex-start',
@@ -45,13 +45,14 @@ export const Month = Object.assign(
       '&:last-child': { borderRight: `1px solid ${theme.colors.border}` },
     })),
 
-    Date: styled(Text)<{ isDay?: boolean; isMonth?: boolean }>(
-      ({ isDay, isMonth, theme }) => ({
-        fontWeight: theme.fontWeights.bold,
-        opacity: isMonth ? 1 : 0.5,
-        ...(isDay && { marginLeft: '.25rem', marginRight: '.25rem' }),
-      })
-    ),
+    Date: styled(({ isDay, isMonth, ...rest }: any) => <Text {...rest} />)<{
+      isDay?: boolean
+      isMonth?: boolean
+    }>(({ isDay, isMonth, theme }) => ({
+      fontWeight: theme.fontWeights.bold,
+      opacity: isMonth ? 1 : 0.5,
+      ...(isDay && { marginLeft: '.25rem', marginRight: '.25rem' }),
+    })),
 
     Day: styled(Column)({ alignItems: 'flex-end' }),
 
@@ -77,7 +78,17 @@ export const Month = Object.assign(
 export const MonthEvents = Object.assign(
   styled(Flex)({ flex: 1, flexDirection: 'column', width: '100%' }),
   {
-    Daily: styled(Flex)<{
+    Daily: styled(
+      ({
+        background,
+        editable,
+        isEnd,
+        isHourly,
+        isStart,
+        span,
+        ...rest
+      }: any) => <Flex {...rest} />
+    )<{
       background: string
       editable: boolean
       isEnd?: boolean
@@ -105,7 +116,9 @@ export const MonthEvents = Object.assign(
     })),
 
     Empty: styled(Row)({ width: '100%', height: 18 }),
-    Hourly: styled(Flex)<{ background: string; editable: boolean }>(
+    Hourly: styled(({ background, editable, ...rest }: any) => (
+      <Flex {...rest} />
+    ))<{ background: string; editable: boolean }>(
       ({ background, editable, theme }) => ({
         fontSize: theme.fontSizes.xs,
         lineHeight: 'normal',

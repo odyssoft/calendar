@@ -35,6 +35,7 @@ const params = (view: CalendarView) => ({
   calendar: {
     data: [],
     date,
+    editable: true,
     week: getWeek({
       date,
       month: getMonthEvents({

@@ -70,7 +70,7 @@ export const CalendarHeader = ({ children }: React.PropsWithChildren) => {
           </Row>
         </Header.Nav>
       )}
-      <Header.Content>{children}</Header.Content>
+      <Header.Content navigation={navigation}>{children}</Header.Content>
     </Header>
   )
 }

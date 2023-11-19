@@ -13,7 +13,7 @@ export const EditModal = () => (
 )
 
 const Modal = () => {
-  const { disabled, event, handleClose, handleSave, setEvent } = useEdit()
+  const { disabled, event, handleClose, handleSave } = useEdit()
 
   return (
     <Base

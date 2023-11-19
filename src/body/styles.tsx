@@ -31,7 +31,9 @@ export const Body = Object.assign(
   }
 )
 
-export const DayButton = styled(IconButton)<{
+export const DayButton = styled(({ isDay, isMonth, ...props }: any) => (
+  <IconButton {...props} />
+))<{
   isDay?: boolean
   isMonth?: boolean
 }>(({ isDay, isMonth, theme }) => ({

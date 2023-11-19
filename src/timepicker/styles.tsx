@@ -18,7 +18,9 @@ export const Picker = Object.assign(styled(Column)({}), {
     marginBottom: 10,
   })),
 
-  Item: styled(MenuItem)<{ active: boolean }>(({ active, theme }) => ({
+  Item: styled(({ active, ...rest }: any) => <MenuItem {...rest} />)<{
+    active: boolean
+  }>(({ active, theme }) => ({
     borderRadius: 4,
     boxShadow: theme.boxShadows.sm,
     padding: '.125rem .5rem',

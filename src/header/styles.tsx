@@ -2,9 +2,15 @@ import { AppBar, Button, IconButton, styled } from '@mui/material'
 import { Flex, Text } from '../styles'
 
 export const Header = Object.assign(
-  styled(Flex)({ flex: 1, maxWidth: '100%', maxHeight: '100%' }),
+  styled(({ active, ...rest }: any) => <Flex {...rest} />)({
+    flex: 1,
+    maxWidth: '100%',
+    maxHeight: '100%',
+  }),
   {
-    Button: styled(Button)<{ active: boolean }>(({ active, theme }) => ({
+    Button: styled(({ active, ...rest }: any) => <Button {...rest} />)<{
+      active: boolean
+    }>(({ active, theme }) => ({
       color: theme.palette.text.primary,
       fontWeight: theme.typography.fontWeightBold,
       textTransform: 'uppercase',
@@ -21,7 +27,12 @@ export const Header = Object.assign(
         },
     })),
 
-    Content: styled(Flex)({ flex: 1, maxHeight: 'calc(100% - 58px)' }),
+    Content: styled(({ navigation, ...rest }: any) => <Flex {...rest} />)<{
+      navigation: boolean
+    }>(({ navigation }) => ({
+      flex: 1,
+      maxHeight: `calc(100% - ${navigation ? 58 : 0}px)`,
+    })),
 
     IconButton: styled(IconButton)(({ theme }) => ({
       borderRadius: 12,

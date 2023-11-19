@@ -14,7 +14,7 @@ export const AlldayCheckbox = () => {
   return (
     <FormControlLabel
       control={<Checkbox onChange={handleChange} />}
-      checked={event?.allDay}
+      checked={!!event?.allDay}
       label='All Day'
     />
   )

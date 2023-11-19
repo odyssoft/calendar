@@ -16,7 +16,9 @@ const Button = styled(IconButton)(({ theme }) => ({
   '&:hover': { background: 'rgba(255, 255, 255, 0.08)' },
 }))
 
-export const Container = styled(Flex)<{ week: boolean }>(({ week }) => ({
+export const Container = styled(({ week, ...rest }: any) => (
+  <Flex {...rest} />
+))<{ week: boolean }>(({ week }) => ({
   borderRadius: 9,
   flexDirection: 'column',
   height: 245,
@@ -63,14 +65,15 @@ export const Day = Object.assign(
       },
     })),
 
-    Text: styled(Text)<{ disabled: boolean; month: boolean }>(
-      ({ disabled, month, theme }) => ({
-        color: theme.palette.text.primary,
-        fontSize: theme.fontSizes.xs,
-        fontWeight: theme.fontWeights.semibold,
-        opacity: !month || disabled ? 0.25 : 1,
-      })
-    ),
+    Text: styled(({ disabled, month, ...rest }: any) => <Text {...rest} />)<{
+      disabled: boolean
+      month: boolean
+    }>(({ disabled, month, theme }) => ({
+      color: theme.palette.text.primary,
+      fontSize: theme.fontSizes.xs,
+      fontWeight: theme.fontWeights.semibold,
+      opacity: !month || disabled ? 0.25 : 1,
+    })),
   }
 )
 

@@ -49,38 +49,47 @@ export const Week = Object.assign(
         zIndex: 1,
       },
     })),
-    Event: styled(Flex)<{ background: string; span: number; start: string }>(
-      ({ background, span, start, theme }) => ({
-        borderRadius: 3,
-        fontSize: theme.fontSizes.xs,
-        height: `${100 * span}%`,
-        marginTop: `${(Number(start.split(':')[1]) / 60) * 42}px`,
-        minHeight: `${100 * span}%`,
-        position: 'relative',
-        overflow: 'hidden',
-        paddingLeft: '.65rem',
+    Event: styled(({ background, editable, span, start, ...rest }: any) => (
+      <Flex {...rest} />
+    ))<{
+      background: string
+      editable: boolean
+      span: number
+      start: string
+    }>(({ background, editable, span, start, theme }) => ({
+      borderRadius: 3,
+      fontSize: theme.fontSizes.xs,
+      height: `${100 * span}%`,
+      marginTop: `${(Number(start.split(':')[1]) / 60) * 42}px`,
+      minHeight: `${100 * span}%`,
+      position: 'relative',
+      overflow: 'hidden',
+      paddingLeft: '.65rem',
+      width: '100%',
+      '&:after': {
+        background,
+        content: '""',
+        position: 'absolute',
+        height: '100%',
+        left: 0,
+        top: 0,
+        width: 5,
+        zIndex: 1,
+      },
+      '&:before': {
+        background: color(background),
+        content: '""',
+        height: '100%',
+        left: 0,
+        position: 'absolute',
+        top: 0,
         width: '100%',
-        '&:after': {
-          background,
-          content: '""',
-          position: 'absolute',
-          height: '100%',
-          left: 0,
-          top: 0,
-          width: 5,
-          zIndex: 1,
-        },
-        '&:before': {
-          background: color(background),
-          content: '""',
-          height: '100%',
-          left: 0,
-          position: 'absolute',
-          top: 0,
-          width: '100%',
-        },
-      })
-    ),
+      },
+      ...(editable && {
+        cursor: 'pointer',
+        '&:hover': { opacity: 0.75 },
+      }),
+    })),
     Space: styled(Column)<{ time?: string }>(({ theme, time }) => ({
       borderRight: `1px solid ${theme.colors.border}`,
       maxWidth: '3.5rem',
