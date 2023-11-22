@@ -68,8 +68,8 @@ export type DateKey = DateType | DateTimeType
 export type DateTimeType = `${DateType} ${TimeType}`
 
 export type DateType =
+  | string
   | `${number}${number}-${number}${number}-${number}${number}${number}${number}`
-  | ''
 
 export type EventType = 'allDay' | 'hourly'
 

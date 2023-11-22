@@ -1,4 +1,6 @@
+import React from 'react'
 import { AppBar, Button, IconButton, styled } from '@mui/material'
+
 import { Flex, Text } from '../styles'
 
 export const Header = Object.assign(

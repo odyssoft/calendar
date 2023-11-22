@@ -1,4 +1,6 @@
+import React from 'react'
 import { IconButton, styled } from '@mui/material'
+
 import { Column, Flex, Text } from '../styles'
 import { CalendarView } from '../types'
 
