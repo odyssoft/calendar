@@ -48,6 +48,7 @@ export const Sidebar = Object.assign(
       overflowY: 'auto',
       transition: 'all 0.25s ease-in-out',
       width: visible ? 237 : 0,
+      minWidth: visible ? 237 : 0,
     })),
   }
 )

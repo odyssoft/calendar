@@ -1,41 +1,41 @@
 //vite.config.js
-import react from "@vitejs/plugin-react";
-import { resolve } from "path";
-import { visualizer} from 'rollup-plugin-visualizer'
-import { defineConfig } from "vite";
-import dts from "vite-plugin-dts";
+import react from '@vitejs/plugin-react'
+import { resolve } from 'path'
+import { visualizer } from 'rollup-plugin-visualizer'
+import { defineConfig } from 'vite'
+import dts from 'vite-plugin-dts'
 
-
-export default defineConfig ({
+export default defineConfig({
   build: {
     lib: {
-      entry: resolve(__dirname, "src/index.tsx"),
-      name: "@odyssoft/calendar",
-      fileName: "index",
+      entry: resolve(__dirname, 'src/index.tsx'),
+      name: '@odyssoft/calendar',
+      fileName: 'index',
     },
     rollupOptions: {
-      external: ["react"],
+      external: ['react', '**/mocks/*'],
       // output: {
       //   preserveModules: true,
       // }
       output: {
         globals: {
-          react: "React",
+          react: 'React',
         },
-        exports: 'named'
+        exports: 'named',
       },
     },
   },
+
   plugins: [
     react({
-      jsxRuntime: "classic",
+      jsxRuntime: 'classic',
     }),
     visualizer(),
     dts(),
   ],
   optimizeDeps: {
     esbuildOptions: {
-      jsx: 'automatic'
-    }
-  }
-});
+      jsx: 'automatic',
+    },
+  },
+})
