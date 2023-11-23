@@ -16,6 +16,7 @@ import { Header } from './styles'
 
 export const CalendarHeader = ({ children }: React.PropsWithChildren) => {
   const {
+    disableSidebar,
     navigation,
     next,
     previous,
@@ -32,15 +33,21 @@ export const CalendarHeader = ({ children }: React.PropsWithChildren) => {
     <Header direction='column'>
       {navigation && (
         <Header.Nav>
-          <Header.IconButton onClick={toggleSidebar}>
-            {sidebar ? <WestRounded /> : <EastRounded />}
-          </Header.IconButton>
+          {!disableSidebar && (
+            <Header.IconButton onClick={toggleSidebar}>
+              {sidebar ? <WestRounded /> : <EastRounded />}
+            </Header.IconButton>
+          )}
 
           <Header.Button
             active={false}
             onClick={() => selectDay(moment().format('DD-MM-YYYY') as DateType)}
             startIcon={<CalendarMonthRounded />}
-            style={{ minWidth: 85, maxHeight: 32 }}
+            style={{
+              minWidth: 85,
+              maxHeight: 32,
+              ...(!disableSidebar && { marginLeft: '.5rem' }),
+            }}
           >
             Today
           </Header.Button>

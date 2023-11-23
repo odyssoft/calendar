@@ -19,6 +19,7 @@ const now = moment()
 export const Context = React.createContext<CalendarContext>({
   calendars: [],
   date: now,
+  disableSidebar: true,
   excluded: [],
   month: [],
   navigation: false,
@@ -50,6 +51,7 @@ export const CalendarProvider = ({
   views = VIEWS,
 }: CalendarProviderProps) => {
   const [date, setDate] = React.useState<moment.Moment>(now)
+  const [disableSidebar, setDisableSidebar] = React.useState<boolean>(!sb)
   const [excluded, setExcluded] = React.useState<string[]>([])
   const [selectedEvent, selectEvent] = React.useState<CalendarEvent>()
   const [sidebar, setSidebar] = React.useState<boolean>(sb)
@@ -108,6 +110,7 @@ export const CalendarProvider = ({
         value={{
           calendars,
           date,
+          disableSidebar,
           editable,
           excluded,
           month,

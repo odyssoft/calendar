@@ -4,6 +4,7 @@ import React from 'react'
 export type CalendarContext = {
   calendars: CalendarType[]
   date: moment.Moment
+  disableSidebar: boolean
   editable?: boolean
   excluded: string[]
   month: CalendarDate[][]
