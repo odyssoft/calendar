@@ -8,7 +8,7 @@ import { EditModal } from './'
 
 const meta: Meta<typeof EditModal> = {
   component: EditModal,
-  title: 'Calendar/Edit Modal',
+  title: 'Sections/Edit Modal',
   decorators: [
     (Story) => (
       <ThemeProvider>

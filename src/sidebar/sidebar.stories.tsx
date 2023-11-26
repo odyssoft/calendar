@@ -7,7 +7,7 @@ import moment from 'moment'
 
 const meta: Meta<typeof CalendarSidebar> = {
   component: CalendarSidebar,
-  title: 'Calendar/Sidebar',
+  title: 'Sections/Sidebar',
   decorators: [
     (Story, context) => (
       <ThemeProvider>

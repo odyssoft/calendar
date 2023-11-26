@@ -10,7 +10,7 @@ import { CalendarView } from '../types'
 
 const meta: Meta<typeof CalendarWeek> = {
   component: CalendarWeek,
-  title: 'Calendar/Week',
+  title: 'Sections/Week',
   decorators: [
     (Story, context) => (
       <ThemeProvider>

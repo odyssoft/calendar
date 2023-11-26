@@ -19,5 +19,8 @@
     "jsx": "preserve"
   },
   "include": ["src"],
+  "paths": {
+    "@odyssoft/calendar": ["../dist/"]
+  },
   "exclude": ["node_modules", "dist"]
 }

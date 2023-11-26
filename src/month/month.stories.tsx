@@ -9,7 +9,7 @@ import { CalendarMonth } from './'
 
 const meta: Meta<typeof CalendarMonth> = {
   component: CalendarMonth,
-  title: 'Calendar/Month',
+  title: 'Sections/Month',
   decorators: [
     (Story, context) => (
       <ThemeProvider>

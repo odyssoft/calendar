@@ -6,7 +6,7 @@ import { Context } from '../context'
 
 const meta: Meta<typeof CalendarHeader> = {
   component: CalendarHeader,
-  title: 'Calendar/Header',
+  title: 'Sections/Header',
   decorators: [
     (Story) => (
       <ThemeProvider>
