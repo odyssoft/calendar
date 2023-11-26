@@ -1,9 +1,9 @@
 {
   "name": "@odyssoft/calendar",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Full screen calendar component built using React, Storybook, Material UI, Material UI Icons and Emotion",
   "main": "dist/index.js",
-  "module": "dist/index.esm.js",
+  "module": "dist/index.umd.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "dev": "cd example&&npm run dev",

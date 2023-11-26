@@ -9,3 +9,4 @@ webpack.config.js
 stats.html
 vite.config.js
 .github
+tsconfig.json
