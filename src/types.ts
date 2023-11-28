@@ -1,4 +1,5 @@
 import { Property } from 'csstype'
+import moment from 'moment'
 import React from 'react'
 
 export type CalendarContext = {
