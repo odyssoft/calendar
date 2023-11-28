@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 import { DateType } from '../types'
 
 export type MiniCalendarProps = {

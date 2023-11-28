@@ -2,6 +2,8 @@
 
 Full screen calendar built using React, storybook, Mui, Mui-icons &amp; emotion
 
+![Preview](/images/preview.png?raw=true "Full Preview")
+
 ## Installation
 
 ```bash
